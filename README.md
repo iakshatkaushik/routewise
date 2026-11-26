@@ -2,6 +2,7 @@
 
 **Send each prompt to the cheapest LLM that can answer it well.**
 
+[![tests](https://github.com/iakshatkaushik/routewise/actions/workflows/tests.yml/badge.svg)](https://github.com/iakshatkaushik/routewise/actions/workflows/tests.yml)
 ![Python 3.13](https://img.shields.io/badge/python-3.13-blue)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.9-orange)
 ![PyTorch MPS](https://img.shields.io/badge/PyTorch-Apple%20GPU%20(MPS)-red)

@@ -1,0 +1,23 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      ROUTER_MODE: light   # logistic-regression router; skips the embedding model download
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - name: Install dependencies (web service + test tools, no PyTorch)
+        run: pip install -r requirements-app.txt pandas==3.1.1 pyarrow==26.0.1 pytest==9.2.0
+      - name: Run tests
+        run: pytest -q
