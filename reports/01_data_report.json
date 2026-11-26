@@ -1,0 +1,17 @@
+{
+  "train": {
+    "rows_in": 109101,
+    "dropped_empty_or_invalid": 0,
+    "dropped_duplicates": 0,
+    "rows_out": 109101,
+    "dropped_overlap_with_test": 0
+  },
+  "test": {
+    "rows_in": 10000,
+    "dropped_empty_or_invalid": 0,
+    "dropped_duplicates": 0,
+    "rows_out": 10000
+  },
+  "fail_rate_train": 0.13521415935692616,
+  "fail_rate_test": 0.1353
+}

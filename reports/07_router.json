@@ -1,0 +1,123 @@
+{
+  "selection_log": [
+    {
+      "components": [
+        "Embedding Neural Network (GPU)"
+      ],
+      "val_auc": 0.76
+    },
+    {
+      "components": [
+        "Embedding Neural Network (GPU)",
+        "Logistic Regression"
+      ],
+      "val_auc": 0.7711
+    }
+  ],
+  "compression": {},
+  "light_mode": {
+    "components": [
+      "Logistic Regression"
+    ],
+    "test_auc": 0.7680008301286791,
+    "test_apgr": 0.6826515930113055,
+    "cpt50": 0.26,
+    "cpt80": 0.5700000000000001,
+    "trained_rows": 109101,
+    "cheap_model_in_data": "Mixtral-8x7B-Instruct",
+    "strong_model_in_data": "GPT-4",
+    "built": "2026-11-26",
+    "mode": "light"
+  },
+  "components": [
+    "Embedding Neural Network (GPU)",
+    "Logistic Regression"
+  ],
+  "test_classification_at_30pct": {
+    "roc_auc": 0.7807308944542498,
+    "threshold": 0.15632367134094236,
+    "accuracy": 0.7455,
+    "precision": 0.2967257844474761,
+    "recall_sensitivity": 0.6430155210643016,
+    "specificity": 0.761535792760495,
+    "f1": 0.40606767794632437,
+    "confusion_matrix": {
+      "tn": 6585,
+      "fp": 2062,
+      "fn": 483,
+      "tp": 870
+    }
+  },
+  "test_routing": {
+    "apgr": 0.6912863994518672,
+    "cpt50": 0.25,
+    "cpt80": 0.55,
+    "cpt90": 0.72,
+    "quality_cheap_only": 4.4162,
+    "quality_strong_only": 5.0,
+    "at_20pct": {
+      "strong_share": 0.2,
+      "quality": 4.6687,
+      "pgr": 0.4325111339499835
+    },
+    "at_30pct": {
+      "strong_share": 0.3,
+      "quality": 4.7481,
+      "pgr": 0.5685166152792053
+    },
+    "at_50pct": {
+      "strong_share": 0.5,
+      "quality": 4.8665,
+      "pgr": 0.7713257965056531
+    }
+  },
+  "baselines": {
+    "oracle": {
+      "apgr": 0.8942069201781433,
+      "cpt50": 0.09,
+      "cpt80": 0.2,
+      "cpt90": 0.25,
+      "quality_cheap_only": 4.4162,
+      "quality_strong_only": 5.0,
+      "at_20pct": {
+        "strong_share": 0.2,
+        "quality": 4.8931,
+        "pgr": 0.8168893456663233
+      },
+      "at_30pct": {
+        "strong_share": 0.3,
+        "quality": 4.9931,
+        "pgr": 0.9881808838643372
+      },
+      "at_50pct": {
+        "strong_share": 0.5,
+        "quality": 5.0,
+        "pgr": 1.0
+      }
+    },
+    "random_apgr": 0.4998450668037
+  },
+  "budget_check": {
+    "0%": 0.0,
+    "10%": 0.1016,
+    "20%": 0.1968,
+    "30%": 0.2932,
+    "40%": 0.3896,
+    "50%": 0.4897,
+    "60%": 0.5876,
+    "70%": 0.681,
+    "80%": 0.7876,
+    "90%": 0.8865,
+    "100%": 1.0
+  },
+  "performance": {
+    "artifact_mb": 16.87,
+    "batch_ms_per_prompt": 76.794,
+    "single_p50_ms": 16.33,
+    "single_p95_ms": 159.68,
+    "max_abs_diff_vs_offline": 0.0006821751594543457,
+    "mean_abs_diff_vs_offline": 9.516757563687861e-05,
+    "decision_agreement_at_30pct": 1.0,
+    "note": "online embeddings use ONNX on CPU; offline used PyTorch on the GPU"
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "Simple Linear (log prompt length)": {
+    "test": {
+      "rmse": 1.0690381769278399,
+      "mae": 0.7887264404296875,
+      "pearson_r": 0.17377105927866152,
+      "r2": 0.030155815484810167
+    },
+    "routing": {
+      "apgr": 0.595433367591641,
+      "cpt50": 0.36,
+      "cpt80": 0.68,
+      "cpt90": 0.8200000000000001,
+      "quality_cheap_only": 4.4162,
+      "quality_strong_only": 5.0,
+      "at_20pct": {
+        "strong_share": 0.2,
+        "quality": 4.5817,
+        "pgr": 0.2834874957177111
+      },
+      "at_30pct": {
+        "strong_share": 0.3,
+        "quality": 4.6587,
+        "pgr": 0.415381980130181
+      },
+      "at_50pct": {
+        "strong_share": 0.5,
+        "quality": 4.802,
+        "pgr": 0.6608427543679336
+      }
+    },
+    "fit_seconds": 0.0,
+    "equation": "score = 5.191 + -0.151 * log(1 + chars)"
+  },
+  "Multiple Linear (24 prompt stats)": {
+    "test": {
+      "rmse": 1.0505142945487151,
+      "mae": 0.7743960983514786,
+      "pearson_r": 0.2520850173143937,
+      "r2": 0.06347479745695062
+    },
+    "routing": {
+      "apgr": 0.6264114422747517,
+      "cpt50": 0.33,
+      "cpt80": 0.64,
+      "cpt90": 0.81,
+      "quality_cheap_only": 4.4162,
+      "quality_strong_only": 5.0,
+      "at_20pct": {
+        "strong_share": 0.2,
+        "quality": 4.6178,
+        "pgr": 0.3453237410071942
+      },
+      "at_30pct": {
+        "strong_share": 0.3,
+        "quality": 4.6894,
+        "pgr": 0.4679684823569717
+      },
+      "at_50pct": {
+        "strong_share": 0.5,
+        "quality": 4.8181,
+        "pgr": 0.6884206920178149
+      }
+    },
+    "fit_seconds": 0.1,
+    "top_coefficients": {
+      "log_chars": -0.12240000069141388,
+      "frac_digit": -0.0949999988079071,
+      "translate": -0.09049999713897705,
+      "frac_punct": -0.04969999939203262,
+      "n_lines": 0.04520000144839287,
+      "starts_wh_question": 0.043800000101327896,
+      "n_numbers": -0.039500001817941666,
+      "n_sentences": 0.03929999843239784
+    }
+  },
+  "Polynomial deg-2 (24 prompt stats)": {
+    "test": {
+      "rmse": 1.039298009360491,
+      "mae": 0.7609207511663437,
+      "pearson_r": 0.2894998984070085,
+      "r2": 0.08336649565808152
+    },
+    "routing": {
+      "apgr": 0.6404522096608427,
+      "cpt50": 0.3,
+      "cpt80": 0.63,
+      "cpt90": 0.8,
+      "quality_cheap_only": 4.4162,
+      "quality_strong_only": 5.0,
+      "at_20pct": {
+        "strong_share": 0.2,
+        "quality": 4.6338,
+        "pgr": 0.3727303871188763
+      },
+      "at_30pct": {
+        "strong_share": 0.3,
+        "quality": 4.7083,
+        "pgr": 0.5003425830763968
+      },
+      "at_50pct": {
+        "strong_share": 0.5,
+        "quality": 4.828,
+        "pgr": 0.7053785542994182
+      }
+    },
+    "fit_seconds": 4.6,
+    "note": "324 polynomial terms; a tiny ridge penalty (alpha=1) keeps the solution stable"
+  },
+  "Ridge (L2), full features": {
+    "test": {
+      "rmse": 0.9885845351854309,
+      "mae": 0.7067696419239045,
+      "pearson_r": 0.41331973009096895,
+      "r2": 0.17063985569464313
+    },
+    "routing": {
+      "apgr": 0.6846539910928402,
+      "cpt50": 0.25,
+      "cpt80": 0.56,
+      "cpt90": 0.73,
+      "quality_cheap_only": 4.4162,
+      "quality_strong_only": 5.0,
+      "at_20pct": {
+        "strong_share": 0.2,
+        "quality": 4.6687,
+        "pgr": 0.4325111339499835
+      },
+      "at_30pct": {
+        "strong_share": 0.3,
+        "quality": 4.7446,
+        "pgr": 0.5625214114422751
+      },
+      "at_50pct": {
+        "strong_share": 0.5,
+        "quality": 4.8552,
+        "pgr": 0.7519698526892771
+      }
+    },
+    "fit_seconds": 145.6,
+    "alpha": 10
+  },
+  "Lasso (L1), full features": {
+    "test": {
+      "rmse": 1.0292321478487454,
+      "mae": 0.7429333211421967,
+      "pearson_r": 0.32479509774369675,
+      "r2": 0.10103616181782882
+    },
+    "routing": {
+      "apgr": 0.6496077423775267,
+      "cpt50": 0.29,
+      "cpt80": 0.63,
+      "cpt90": 0.79,
+      "quality_cheap_only": 4.4162,
+      "quality_strong_only": 5.0,
+      "at_20pct": {
+        "strong_share": 0.2,
+        "quality": 4.6397,
+        "pgr": 0.38283658787255986
+      },
+      "at_30pct": {
+        "strong_share": 0.3,
+        "quality": 4.7141,
+        "pgr": 0.5102774922918811
+      },
+      "at_50pct": {
+        "strong_share": 0.5,
+        "quality": 4.829,
+        "pgr": 0.7070914696813974
+      }
+    },
+    "fit_seconds": 222.0,
+    "alpha": 0.0001,
+    "nonzero_coefficients": 604,
+    "total_features": 300024
+  },
+  "Elastic Net (L1+L2), full features": {
+    "test": {
+      "rmse": 1.0257753541493366,
+      "mae": 0.7459680296421051,
+      "pearson_r": 0.32821475224793367,
+      "r2": 0.10706456665705966
+    },
+    "routing": {
+      "apgr": 0.6535902706406305,
+      "cpt50": 0.29,
+      "cpt80": 0.62,
+      "cpt90": 0.77,
+      "quality_cheap_only": 4.4162,
+      "quality_strong_only": 5.0,
+      "at_20pct": {
+        "strong_share": 0.2,
+        "quality": 4.6378,
+        "pgr": 0.37958204864679757
+      },
+      "at_30pct": {
+        "strong_share": 0.3,
+        "quality": 4.7166,
+        "pgr": 0.5145597807468306
+      },
+      "at_50pct": {
+        "strong_share": 0.5,
+        "quality": 4.8302,
+        "pgr": 0.7091469681397733
+      }
+    },
+    "fit_seconds": 308.0,
+    "alpha": 0.0002,
+    "l1_ratio": 0.5
+  },
+  "_baseline_predict_mean": {
+    "rmse": 1.0855492052152809,
+    "mae": 0.8116913098871686,
+    "pearson_r": null,
+    "r2": -3.353504417380471e-05
+  }
+}

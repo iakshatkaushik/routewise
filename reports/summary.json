@@ -1,0 +1,1075 @@
+{
+  "built": "2026-11-26",
+  "data": {
+    "train_rows": 109101,
+    "test_rows": 10000,
+    "removed": 0,
+    "fail_rate_train": 0.13521415935692616,
+    "fail_rate_test": 0.1353
+  },
+  "features": {
+    "ablation": {
+      "word_only": {
+        "val_auc": 0.7544,
+        "n_features": 60025,
+        "seconds": 99.8
+      },
+      "char_only": {
+        "val_auc": 0.7466,
+        "n_features": 60025,
+        "seconds": 87.3
+      },
+      "word+char": {
+        "val_auc": 0.7527,
+        "n_features": 120024,
+        "seconds": 86.4
+      },
+      "word+char+stats": {
+        "val_auc": 0.7552,
+        "n_features": 120024,
+        "seconds": 106.7
+      },
+      "small_vocab_20k": {
+        "val_auc": 0.7522,
+        "n_features": 40024,
+        "seconds": 102.4
+      },
+      "large_vocab_150k": {
+        "val_auc": 0.7572,
+        "n_features": 300024,
+        "seconds": 149.5
+      }
+    },
+    "chosen": "large_vocab_150k",
+    "n_features": 300024,
+    "svd_components": 256,
+    "svd_explained_variance": 0.915389895439148,
+    "svd_seconds": 176.2
+  },
+  "classifiers": [
+    {
+      "name": "Logistic Regression",
+      "params": "C=0.25",
+      "val_auc": 0.7598,
+      "test_auc": 0.7680008301286794,
+      "apgr": 0.6826515930113055,
+      "cpt80": 0.5700000000000001,
+      "precision": 0.2864617396991498,
+      "recall": 0.647450110864745,
+      "specificity": 0.7476581473343356,
+      "f1": 0.39718884606665156,
+      "accuracy": 0.7341,
+      "fit_seconds": 53.0,
+      "predict_ms_per_1k": 2.51
+    },
+    {
+      "name": "Linear SVM",
+      "params": "C=0.03",
+      "val_auc": 0.7603,
+      "test_auc": 0.7685504313857019,
+      "apgr": 0.6829102432339844,
+      "cpt80": 0.5700000000000001,
+      "precision": 0.2854330708661417,
+      "recall": 0.6430155210643016,
+      "specificity": 0.7481207355152076,
+      "f1": 0.39536468984321743,
+      "accuracy": 0.7339,
+      "fit_seconds": 111.1,
+      "predict_ms_per_1k": 12.92
+    },
+    {
+      "name": "RBF-kernel SVM (20k sample)",
+      "params": "C=0.5, gamma=scale",
+      "val_auc": 0.7245,
+      "test_auc": 0.7176338494884049,
+      "apgr": 0.6481089414182939,
+      "cpt80": 0.61,
+      "precision": 0.26076794657762936,
+      "recall": 0.5772357723577236,
+      "specificity": 0.7439574418873598,
+      "f1": 0.359245630174793,
+      "accuracy": 0.7214,
+      "fit_seconds": 72.6,
+      "predict_ms_per_1k": 2806.19
+    },
+    {
+      "name": "Multinomial Naive Bayes",
+      "params": "alpha=0.1",
+      "val_auc": 0.7161,
+      "test_auc": 0.7140485346630436,
+      "apgr": 0.6418550873586846,
+      "cpt80": 0.67,
+      "precision": 0.26303397241843257,
+      "recall": 0.5779748706577975,
+      "specificity": 0.7466173239273737,
+      "f1": 0.3615349052242256,
+      "accuracy": 0.7238,
+      "fit_seconds": 0.9,
+      "predict_ms_per_1k": 12.57
+    },
+    {
+      "name": "Complement Naive Bayes",
+      "params": "alpha=0.1",
+      "val_auc": 0.7161,
+      "test_auc": 0.7140464405369475,
+      "apgr": 0.6418550873586846,
+      "cpt80": 0.67,
+      "precision": 0.26303397241843257,
+      "recall": 0.5779748706577975,
+      "specificity": 0.7466173239273737,
+      "f1": 0.3615349052242256,
+      "accuracy": 0.7238,
+      "fit_seconds": 0.4,
+      "predict_ms_per_1k": 4.94
+    },
+    {
+      "name": "Decision Tree (Gini)",
+      "params": "max_depth=8, min_samples_leaf=200",
+      "val_auc": 0.7049,
+      "test_auc": 0.7100156751748873,
+      "apgr": 0.6420109626584448,
+      "cpt80": 0.63,
+      "precision": 0.24179829890643986,
+      "recall": 0.5883222468588323,
+      "specificity": 0.7113449751358852,
+      "f1": 0.3427341227125942,
+      "accuracy": 0.6947,
+      "fit_seconds": 33.0,
+      "predict_ms_per_1k": 0.58
+    },
+    {
+      "name": "Decision Tree (Entropy / information gain)",
+      "params": "max_depth=8, min_samples_leaf=200",
+      "val_auc": 0.7104,
+      "test_auc": 0.7153084720392711,
+      "apgr": 0.6449588900308326,
+      "cpt80": 0.62,
+      "precision": 0.24726818607555417,
+      "recall": 0.5853658536585366,
+      "specificity": 0.7211749739794149,
+      "f1": 0.3476733977172959,
+      "accuracy": 0.7028,
+      "fit_seconds": 45.6,
+      "predict_ms_per_1k": 0.76
+    },
+    {
+      "name": "Random Forest",
+      "params": "max_depth=None, min_samples_leaf=8, max_features=sqrt",
+      "val_auc": 0.7472,
+      "test_auc": 0.7518349459386391,
+      "apgr": 0.6690904419321688,
+      "cpt80": 0.59,
+      "precision": 0.2720883534136546,
+      "recall": 0.6008869179600886,
+      "specificity": 0.7484676766508616,
+      "f1": 0.37456807187284036,
+      "accuracy": 0.7285,
+      "fit_seconds": 139.5,
+      "predict_ms_per_1k": 12.99
+    },
+    {
+      "name": "K-Nearest Neighbours",
+      "params": "n_neighbors=150, weights=distance",
+      "val_auc": 0.7257,
+      "test_auc": 0.7247475530991314,
+      "apgr": 0.6518002740664612,
+      "cpt80": 0.62,
+      "precision": 0.2491940683430045,
+      "recall": 0.5713229859571323,
+      "specificity": 0.7306580316872904,
+      "f1": 0.34702581369248037,
+      "accuracy": 0.7091,
+      "fit_seconds": 0.0,
+      "predict_ms_per_1k": 365.2
+    },
+    {
+      "name": "Neural Network (MLP)",
+      "params": "hidden_layer_sizes=(256,), alpha=0.001, activation=relu",
+      "val_auc": 0.7514,
+      "test_auc": 0.7617338372569991,
+      "apgr": 0.6770554984583761,
+      "cpt80": 0.58,
+      "precision": 0.2813013473545843,
+      "recall": 0.6326681448632668,
+      "specificity": 0.7470799121082456,
+      "f1": 0.38944494995450407,
+      "accuracy": 0.7316,
+      "fit_seconds": 10.7,
+      "predict_ms_per_1k": 1.21
+    },
+    {
+      "name": "Gradient Boosting (beyond syllabus)",
+      "params": "learning_rate=0.05, max_leaf_nodes=63",
+      "val_auc": 0.7462,
+      "test_auc": 0.7520384180680858,
+      "apgr": 0.6698989379924633,
+      "cpt80": 0.59,
+      "precision": 0.2644707387272146,
+      "recall": 0.6112342941611234,
+      "specificity": 0.7340117959986122,
+      "f1": 0.3691964285714286,
+      "accuracy": 0.7174,
+      "fit_seconds": 55.0,
+      "predict_ms_per_1k": 15.36
+    },
+    {
+      "name": "Embedding Neural Network (GPU)",
+      "params": "hidden=(512,), dropout=0.4, lr=0.0003, epochs=8, device=mps",
+      "val_auc": 0.76,
+      "test_auc": 0.7688889532797047,
+      "apgr": 0.6837512846865366,
+      "cpt80": 0.55,
+      "precision": 0.28738898756660747,
+      "recall": 0.597930524759793,
+      "specificity": 0.7680120272927027,
+      "f1": 0.3881957773512476,
+      "accuracy": 0.745,
+      "fit_seconds": 1.1,
+      "predict_ms_per_1k": 1.22
+    }
+  ],
+  "activation_functions": {
+    "MLP on SVD (CPU), logistic": {
+      "val_auc": 0.7401,
+      "epochs": 36,
+      "seconds": 6.6
+    },
+    "MLP on SVD (CPU), tanh": {
+      "val_auc": 0.7384,
+      "epochs": 13,
+      "seconds": 1.9
+    },
+    "MLP on SVD (CPU), relu": {
+      "val_auc": 0.7514,
+      "epochs": 30,
+      "seconds": 5.7
+    },
+    "Embedding network (GPU), logistic": {
+      "val_auc": 0.7397,
+      "epochs": 35
+    },
+    "Embedding network (GPU), tanh": {
+      "val_auc": 0.7611,
+      "epochs": 32
+    },
+    "Embedding network (GPU), relu": {
+      "val_auc": 0.76,
+      "epochs": 8
+    },
+    "Embedding network (GPU), gelu": {
+      "val_auc": 0.7594,
+      "epochs": 8
+    }
+  },
+  "baselines": {
+    "random_apgr": 0.4998450668037,
+    "oracle_apgr": 0.8942069201781433
+  },
+  "router": {
+    "components": [
+      "Embedding Neural Network (GPU)",
+      "Logistic Regression"
+    ],
+    "auc": 0.7807308944542498,
+    "classification_at_30pct": {
+      "roc_auc": 0.7807308944542498,
+      "threshold": 0.15632367134094236,
+      "accuracy": 0.7455,
+      "precision": 0.2967257844474761,
+      "recall_sensitivity": 0.6430155210643016,
+      "specificity": 0.761535792760495,
+      "f1": 0.40606767794632437,
+      "confusion_matrix": {
+        "tn": 6585,
+        "fp": 2062,
+        "fn": 483,
+        "tp": 870
+      }
+    },
+    "apgr": 0.6912863994518672,
+    "cpt50": 0.25,
+    "cpt80": 0.55,
+    "cpt90": 0.72,
+    "quality_cheap_only": 4.4162,
+    "quality_strong_only": 5.0,
+    "at_20pct": {
+      "strong_share": 0.2,
+      "quality": 4.6687,
+      "pgr": 0.4325111339499835
+    },
+    "at_30pct": {
+      "strong_share": 0.3,
+      "quality": 4.7481,
+      "pgr": 0.5685166152792053
+    },
+    "at_50pct": {
+      "strong_share": 0.5,
+      "quality": 4.8665,
+      "pgr": 0.7713257965056531
+    },
+    "performance": {
+      "artifact_mb": 16.87,
+      "batch_ms_per_prompt": 76.794,
+      "single_p50_ms": 16.33,
+      "single_p95_ms": 159.68,
+      "max_abs_diff_vs_offline": 0.0006821751594543457,
+      "mean_abs_diff_vs_offline": 9.516757563687861e-05,
+      "decision_agreement_at_30pct": 1.0,
+      "note": "online embeddings use ONNX on CPU; offline used PyTorch on the GPU"
+    },
+    "budget_check": {
+      "0%": 0.0,
+      "10%": 0.1016,
+      "20%": 0.1968,
+      "30%": 0.2932,
+      "40%": 0.3896,
+      "50%": 0.4897,
+      "60%": 0.5876,
+      "70%": 0.681,
+      "80%": 0.7876,
+      "90%": 0.8865,
+      "100%": 1.0
+    }
+  },
+  "curves": {
+    "x": [
+      0.0,
+      0.02,
+      0.04,
+      0.06,
+      0.08,
+      0.1,
+      0.12,
+      0.14,
+      0.16,
+      0.18,
+      0.2,
+      0.22,
+      0.24,
+      0.26,
+      0.28,
+      0.3,
+      0.32,
+      0.34,
+      0.36,
+      0.38,
+      0.4,
+      0.42,
+      0.44,
+      0.46,
+      0.48,
+      0.5,
+      0.52,
+      0.54,
+      0.56,
+      0.58,
+      0.6,
+      0.62,
+      0.64,
+      0.66,
+      0.68,
+      0.7000000000000001,
+      0.72,
+      0.74,
+      0.76,
+      0.78,
+      0.8,
+      0.8200000000000001,
+      0.84,
+      0.86,
+      0.88,
+      0.9,
+      0.92,
+      0.9400000000000001,
+      0.96,
+      0.98,
+      1.0
+    ],
+    "final": [
+      0.0,
+      0.09027064063035241,
+      0.14628297362110296,
+      0.18910585817060682,
+      0.23192874272010916,
+      0.2718396711202475,
+      0.3021582733812951,
+      0.3362452894826994,
+      0.3718739294278867,
+      0.40578965399109335,
+      0.4325111339499835,
+      0.4647139431312094,
+      0.4958890030832481,
+      0.5205549845837624,
+      0.5421377183967119,
+      0.5685166152792053,
+      0.5887290167865709,
+      0.6149366221308666,
+      0.6356628982528265,
+      0.6582733812949648,
+      0.6760877012675577,
+      0.6947584789311403,
+      0.7136005481329218,
+      0.7307297019527244,
+      0.7512846865364852,
+      0.7713257965056531,
+      0.7850291195614941,
+      0.7982185680027408,
+      0.8117505995203843,
+      0.8273381294964036,
+      0.8389859540938672,
+      0.8556012332990753,
+      0.8672490578965405,
+      0.8794107571085984,
+      0.8884892086330932,
+      0.8965399109284009,
+      0.9054470709146966,
+      0.9128126070572107,
+      0.9220623501199047,
+      0.9319972593353891,
+      0.9415895854744784,
+      0.9499828708461796,
+      0.9594039054470712,
+      0.9650565262076046,
+      0.9725933538883179,
+      0.9785885577252481,
+      0.9832134292565943,
+      0.9868105515587533,
+      0.9924631723192867,
+      0.9955464200068513,
+      1.0
+    ],
+    "best_single": [
+      0.0,
+      0.08341897910243265,
+      0.1404590613223704,
+      0.19047619047619077,
+      0.23107228502911956,
+      0.27098321342925635,
+      0.3047276464542654,
+      0.3285371702637885,
+      0.3624528948269951,
+      0.3929427886262419,
+      0.4205207262761216,
+      0.45101062007536835,
+      0.4809866392600208,
+      0.5041109969167519,
+      0.5282631038026717,
+      0.5520726276121963,
+      0.5746831106543331,
+      0.600376841384036,
+      0.616135662898253,
+      0.6384035628639945,
+      0.6581020897567657,
+      0.6776293251113393,
+      0.6969852689277153,
+      0.7190818773552592,
+      0.7408359027064063,
+      0.7608770126755744,
+      0.7800616649537512,
+      0.794792737238781,
+      0.8067831449126414,
+      0.8201438848920857,
+      0.8335046248715314,
+      0.8475505310037678,
+      0.8581706063720457,
+      0.8682768071257276,
+      0.8799246317231928,
+      0.8919150393970532,
+      0.9049331963001023,
+      0.9128126070572107,
+      0.920349434737924,
+      0.9294278862624188,
+      0.9376498800959225,
+      0.9470709146968141,
+      0.9551216169921202,
+      0.9616306954436448,
+      0.9695101062007533,
+      0.9768756423432688,
+      0.9821856800274071,
+      0.9871531346351485,
+      0.9919492977046939,
+      0.9969167523124354,
+      1.0
+    ],
+    "best_single_name": "Embedding Neural Network (GPU)",
+    "best_single_apgr": 0.6837512846865366,
+    "oracle": [
+      0.0,
+      0.13703323055841052,
+      0.27406646111682104,
+      0.39260020554984665,
+      0.4953751284686538,
+      0.5851318944844118,
+      0.6536485097636171,
+      0.7141144227475162,
+      0.7483727303871196,
+      0.7826310380267215,
+      0.8168893456663233,
+      0.8511476533059268,
+      0.8854059609455286,
+      0.9196642685851321,
+      0.9539225762247339,
+      0.9881808838643372,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "regression": [
+    {
+      "name": "Simple Linear (log prompt length)",
+      "rmse": 1.0690381769278399,
+      "mae": 0.7887264404296875,
+      "pearson_r": 0.17377105927866152,
+      "r2": 0.030155815484810167,
+      "apgr": 0.595433367591641,
+      "note": "score = 5.191 + -0.151 * log(1 + chars)"
+    },
+    {
+      "name": "Multiple Linear (24 prompt stats)",
+      "rmse": 1.0505142945487151,
+      "mae": 0.7743960983514786,
+      "pearson_r": 0.2520850173143937,
+      "r2": 0.06347479745695062,
+      "apgr": 0.6264114422747517,
+      "note": null
+    },
+    {
+      "name": "Polynomial deg-2 (24 prompt stats)",
+      "rmse": 1.039298009360491,
+      "mae": 0.7609207511663437,
+      "pearson_r": 0.2894998984070085,
+      "r2": 0.08336649565808152,
+      "apgr": 0.6404522096608427,
+      "note": "324 polynomial terms; a tiny ridge penalty (alpha=1) keeps the solution stable"
+    },
+    {
+      "name": "Ridge (L2), full features",
+      "rmse": 0.9885845351854309,
+      "mae": 0.7067696419239045,
+      "pearson_r": 0.41331973009096895,
+      "r2": 0.17063985569464313,
+      "apgr": 0.6846539910928402,
+      "note": null
+    },
+    {
+      "name": "Lasso (L1), full features",
+      "rmse": 1.0292321478487454,
+      "mae": 0.7429333211421967,
+      "pearson_r": 0.32479509774369675,
+      "r2": 0.10103616181782882,
+      "apgr": 0.6496077423775267,
+      "note": "604 of 300,024 coefficients non-zero"
+    },
+    {
+      "name": "Elastic Net (L1+L2), full features",
+      "rmse": 1.0257753541493366,
+      "mae": 0.7459680296421051,
+      "pearson_r": 0.32821475224793367,
+      "r2": 0.10706456665705966,
+      "apgr": 0.6535902706406305,
+      "note": null
+    }
+  ],
+  "regression_baseline": {
+    "rmse": 1.0855492052152809,
+    "mae": 0.8116913098871686,
+    "pearson_r": null,
+    "r2": -3.353504417380471e-05
+  },
+  "clustering": {
+    "k": 16,
+    "clusters": [
+      {
+        "cluster": 15,
+        "top_words": [
+          "translate",
+          "sentence",
+          "translation",
+          "english",
+          "sentence in",
+          "to translate",
+          "translate the",
+          "given sentence"
+        ],
+        "size_train": 2243,
+        "fail_rate_train": 0.369594293357111,
+        "fail_rate_test": 0.35064935064935066,
+        "mean_score_train": 3.61435577351761,
+        "main_source": "flan_v2_niv2"
+      },
+      {
+        "cluster": 8,
+        "top_words": [
+          "say something",
+          "words",
+          "50 words",
+          "answer when",
+          "your answer",
+          "name_1",
+          "chemical",
+          "say"
+        ],
+        "size_train": 6266,
+        "fail_rate_train": 0.2693903606766677,
+        "fail_rate_test": 0.27624309392265195,
+        "mean_score_train": 3.968720076603894,
+        "main_source": "lmsys-chat-1m"
+      },
+      {
+        "cluster": 4,
+        "top_words": [
+          "input",
+          "output",
+          "given",
+          "question",
+          "answer",
+          "task",
+          "document",
+          "context"
+        ],
+        "size_train": 5410,
+        "fail_rate_train": 0.2177449168207024,
+        "fail_rate_test": 0.18199608610567514,
+        "mean_score_train": 4.166358595194085,
+        "main_source": "flan_v2_niv2"
+      },
+      {
+        "cluster": 13,
+        "top_words": [
+          "step",
+          "it step",
+          "please eliminate",
+          "eliminate two",
+          "options first",
+          "incorrect options",
+          "then think",
+          "most proper"
+        ],
+        "size_train": 2236,
+        "fail_rate_train": 0.21735241502683364,
+        "fail_rate_test": 0.19791666666666666,
+        "mean_score_train": 4.164132379248659,
+        "main_source": "lmsys-chat-1m"
+      },
+      {
+        "cluster": 10,
+        "top_words": [
+          "question",
+          "answer",
+          "yes",
+          "options",
+          "answer is",
+          "not possible",
+          "to tell",
+          "the answer"
+        ],
+        "size_train": 4224,
+        "fail_rate_train": 0.20099431818181818,
+        "fail_rate_test": 0.23035230352303523,
+        "mean_score_train": 4.222301136363637,
+        "main_source": "flan_v2_cot"
+      },
+      {
+        "cluster": 11,
+        "top_words": [
+          "story",
+          "character",
+          "the story",
+          "essay",
+          "song",
+          "poem",
+          "imagine",
+          "pretend"
+        ],
+        "size_train": 3455,
+        "fail_rate_train": 0.19044862518089725,
+        "fail_rate_test": 0.19614147909967847,
+        "mean_score_train": 4.19218523878437,
+        "main_source": "lmsys-chat-1m"
+      },
+      {
+        "cluster": 0,
+        "top_words": [
+          "assistant",
+          "system instructions",
+          "the assistant",
+          "completion",
+          "answer",
+          "instructions",
+          "say",
+          "based on"
+        ],
+        "size_train": 7661,
+        "fail_rate_train": 0.17948048557629553,
+        "fail_rate_test": 0.17534246575342466,
+        "mean_score_train": 4.280381151285733,
+        "main_source": "lmsys-chat-1m"
+      },
+      {
+        "cluster": 7,
+        "top_words": [
+          "code",
+          "return",
+          "https",
+          "int",
+          "string",
+          "data",
+          "import",
+          "com"
+        ],
+        "size_train": 3936,
+        "fail_rate_train": 0.17682926829268292,
+        "fail_rate_test": 0.1942675159235669,
+        "mean_score_train": 4.278455284552845,
+        "main_source": "lmsys-chat-1m"
+      },
+      {
+        "cluster": 9,
+        "top_words": [
+          "code",
+          "provide",
+          "python",
+          "program",
+          "you provide",
+          "using",
+          "function",
+          "data"
+        ],
+        "size_train": 3357,
+        "fail_rate_train": 0.1683050342567769,
+        "fail_rate_test": 0.17207792207792208,
+        "mean_score_train": 4.273160560023831,
+        "main_source": "evol_instruct"
+      },
+      {
+        "cluster": 14,
+        "top_words": [
+          "analyze",
+          "step",
+          "compare",
+          "analyze the",
+          "reason",
+          "puzzle",
+          "by step",
+          "step by"
+        ],
+        "size_train": 3027,
+        "fail_rate_train": 0.16650148662041625,
+        "fail_rate_test": 0.19256756756756757,
+        "mean_score_train": 4.26428807400066,
+        "main_source": "evol_instruct"
+      },
+      {
+        "cluster": 6,
+        "top_words": [
+          "task",
+          "behavior",
+          "sentence",
+          "option",
+          "given",
+          "task is",
+          "provide",
+          "specific"
+        ],
+        "size_train": 7117,
+        "fail_rate_train": 0.16425460165800196,
+        "fail_rate_test": 0.1901081916537867,
+        "mean_score_train": 4.29689475902768,
+        "main_source": "lmsys-chat-1m"
+      },
+      {
+        "cluster": 12,
+        "top_words": [
+          "name_1",
+          "you know",
+          "is name_1",
+          "name_2",
+          "of name_1",
+          "do make",
+          "know",
+          "what does"
+        ],
+        "size_train": 5483,
+        "fail_rate_train": 0.11398869232172168,
+        "fail_rate_test": 0.08,
+        "mean_score_train": 4.507386467262448,
+        "main_source": "lmsys-chat-1m"
+      },
+      {
+        "cluster": 2,
+        "top_words": [
+          "write",
+          "create",
+          "tell me",
+          "explain",
+          "tell",
+          "list",
+          "write me",
+          "story"
+        ],
+        "size_train": 12226,
+        "fail_rate_train": 0.11017503680680517,
+        "fail_rate_test": 0.10704727921498662,
+        "mean_score_train": 4.4377556028136755,
+        "main_source": "lmsys-chat-1m"
+      },
+      {
+        "cluster": 3,
+        "top_words": [
+          "search for",
+          "hello",
+          "suggest",
+          "search",
+          "recipe",
+          "please write",
+          "please tell",
+          "define"
+        ],
+        "size_train": 8112,
+        "fail_rate_train": 0.08530571992110454,
+        "fail_rate_test": 0.0941336971350614,
+        "mean_score_train": 4.573471400394477,
+        "main_source": "lmsys-chat-1m"
+      },
+      {
+        "cluster": 5,
+        "top_words": [
+          "want",
+          "want to",
+          "like to",
+          "trying",
+          "dishes",
+          "like",
+          "help",
+          "need"
+        ],
+        "size_train": 8390,
+        "fail_rate_train": 0.07783075089392133,
+        "fail_rate_test": 0.07672634271099744,
+        "mean_score_train": 4.626936829558999,
+        "main_source": "anthropic-hh"
+      },
+      {
+        "cluster": 1,
+        "top_words": [
+          "does",
+          "you tell",
+          "the best",
+          "how does",
+          "some good",
+          "good",
+          "best",
+          "you explain"
+        ],
+        "size_train": 25958,
+        "fail_rate_train": 0.05539718006009708,
+        "fail_rate_test": 0.05555555555555555,
+        "mean_score_train": 4.685453424763079,
+        "main_source": "anthropic-hh"
+      }
+    ],
+    "hierarchical": {
+      "sample_size": 4000,
+      "silhouette_hierarchical": 0.16474029421806335,
+      "silhouette_kmeans": 0.162032812833786,
+      "adjusted_rand_index": 0.4718832213632529
+    },
+    "dbscan": {
+      "eps": 0.17664748579263687,
+      "n_clusters": 20,
+      "noise_fraction": 0.817,
+      "fail_rate_noise": 0.1478580171358629
+    }
+  },
+  "association": {
+    "apriori": {
+      "frequent_itemsets": 1288,
+      "candidates_counted": 2557,
+      "seconds": 1.07
+    },
+    "naive": {
+      "frequent_itemsets": 1288,
+      "candidates_counted": 12383,
+      "seconds": 5.96
+    },
+    "base_fail_rate": 0.13521415935692616,
+    "min_support": 0.003,
+    "rules_to_fail": [
+      {
+        "if": [
+          "cluster=8",
+          "source=flan_v2_niv2"
+        ],
+        "then": [
+          "outcome=FAIL"
+        ],
+        "support": 0.004,
+        "confidence": 0.517,
+        "lift": 3.824
+      },
+      {
+        "if": [
+          "cluster=15",
+          "source=flan_v2_niv2"
+        ],
+        "then": [
+          "outcome=FAIL"
+        ],
+        "support": 0.0061,
+        "confidence": 0.4477,
+        "lift": 3.311
+      },
+      {
+        "if": [
+          "length=medium",
+          "source=flan_v2_niv2"
+        ],
+        "then": [
+          "outcome=FAIL"
+        ],
+        "support": 0.0045,
+        "confidence": 0.4161,
+        "lift": 3.077
+      },
+      {
+        "if": [
+          "cluster=8",
+          "length=long"
+        ],
+        "then": [
+          "outcome=FAIL"
+        ],
+        "support": 0.0068,
+        "confidence": 0.3824,
+        "lift": 2.828
+      },
+      {
+        "if": [
+          "cluster=15"
+        ],
+        "then": [
+          "outcome=FAIL"
+        ],
+        "support": 0.0076,
+        "confidence": 0.3696,
+        "lift": 2.733
+      },
+      {
+        "if": [
+          "cluster=15",
+          "length=long"
+        ],
+        "then": [
+          "outcome=FAIL"
+        ],
+        "support": 0.0039,
+        "confidence": 0.3656,
+        "lift": 2.704
+      },
+      {
+        "if": [
+          "cluster=8",
+          "has_math"
+        ],
+        "then": [
+          "outcome=FAIL"
+        ],
+        "support": 0.0063,
+        "confidence": 0.3332,
+        "lift": 2.464
+      },
+      {
+        "if": [
+          "has_math",
+          "source=flan_v2_niv2"
+        ],
+        "then": [
+          "outcome=FAIL"
+        ],
+        "support": 0.0085,
+        "confidence": 0.3318,
+        "lift": 2.454
+      },
+      {
+        "if": [
+          "many_constraints",
+          "source=flan_v2_niv2"
+        ],
+        "then": [
+          "outcome=FAIL"
+        ],
+        "support": 0.0043,
+        "confidence": 0.318,
+        "lift": 2.352
+      },
+      {
+        "if": [
+          "source=flan_v2_niv2"
+        ],
+        "then": [
+          "outcome=FAIL"
+        ],
+        "support": 0.0299,
+        "confidence": 0.3136,
+        "lift": 2.319
+      },
+      {
+        "if": [
+          "length=long",
+          "source=flan_v2_niv2"
+        ],
+        "then": [
+          "outcome=FAIL"
+        ],
+        "support": 0.0203,
+        "confidence": 0.3089,
+        "lift": 2.284
+      },
+      {
+        "if": [
+          "has_context_block",
+          "source=flan_v2_niv2"
+        ],
+        "then": [
+          "outcome=FAIL"
+        ],
+        "support": 0.0085,
+        "confidence": 0.293,
+        "lift": 2.167
+      }
+    ]
+  }
+}

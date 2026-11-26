@@ -1,0 +1,424 @@
+{
+  "n_transactions": 109101,
+  "n_items": 42,
+  "min_support": 0.003,
+  "max_len": 3,
+  "base_fail_rate": 0.13521415935692616,
+  "apriori": {
+    "frequent_itemsets": 1288,
+    "candidates_counted": 2557,
+    "seconds": 1.07
+  },
+  "naive": {
+    "frequent_itemsets": 1288,
+    "candidates_counted": 12383,
+    "seconds": 5.96
+  },
+  "rules_to_fail": [
+    {
+      "if": [
+        "cluster=8",
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.004,
+      "confidence": 0.517,
+      "lift": 3.824
+    },
+    {
+      "if": [
+        "cluster=15",
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0061,
+      "confidence": 0.4477,
+      "lift": 3.311
+    },
+    {
+      "if": [
+        "length=medium",
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0045,
+      "confidence": 0.4161,
+      "lift": 3.077
+    },
+    {
+      "if": [
+        "cluster=8",
+        "length=long"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0068,
+      "confidence": 0.3824,
+      "lift": 2.828
+    },
+    {
+      "if": [
+        "cluster=15"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0076,
+      "confidence": 0.3696,
+      "lift": 2.733
+    },
+    {
+      "if": [
+        "cluster=15",
+        "length=long"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0039,
+      "confidence": 0.3656,
+      "lift": 2.704
+    },
+    {
+      "if": [
+        "cluster=8",
+        "has_math"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0063,
+      "confidence": 0.3332,
+      "lift": 2.464
+    },
+    {
+      "if": [
+        "has_math",
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0085,
+      "confidence": 0.3318,
+      "lift": 2.454
+    },
+    {
+      "if": [
+        "many_constraints",
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0043,
+      "confidence": 0.318,
+      "lift": 2.352
+    },
+    {
+      "if": [
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0299,
+      "confidence": 0.3136,
+      "lift": 2.319
+    },
+    {
+      "if": [
+        "length=long",
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0203,
+      "confidence": 0.3089,
+      "lift": 2.284
+    },
+    {
+      "if": [
+        "has_context_block",
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0085,
+      "confidence": 0.293,
+      "lift": 2.167
+    },
+    {
+      "if": [
+        "is_question",
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0108,
+      "confidence": 0.2857,
+      "lift": 2.113
+    },
+    {
+      "if": [
+        "has_math",
+        "length=long"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0119,
+      "confidence": 0.2822,
+      "lift": 2.087
+    },
+    {
+      "if": [
+        "has_math",
+        "length=medium"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0048,
+      "confidence": 0.2718,
+      "lift": 2.01
+    },
+    {
+      "if": [
+        "length=very_long",
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0051,
+      "confidence": 0.2717,
+      "lift": 2.009
+    },
+    {
+      "if": [
+        "cluster=8"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0155,
+      "confidence": 0.2694,
+      "lift": 1.992
+    },
+    {
+      "if": [
+        "cluster=4",
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0061,
+      "confidence": 0.2642,
+      "lift": 1.954
+    },
+    {
+      "if": [
+        "cluster=0",
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0045,
+      "confidence": 0.2579,
+      "lift": 1.907
+    },
+    {
+      "if": [
+        "cluster=6",
+        "source=flan_v2_niv2"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0031,
+      "confidence": 0.2572,
+      "lift": 1.902
+    },
+    {
+      "if": [
+        "has_context_block",
+        "length=long"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0084,
+      "confidence": 0.2552,
+      "lift": 1.888
+    },
+    {
+      "if": [
+        "has_math",
+        "source=lmsys-chat-1m"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0067,
+      "confidence": 0.253,
+      "lift": 1.871
+    },
+    {
+      "if": [
+        "length=long",
+        "multiple_choice"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0035,
+      "confidence": 0.2529,
+      "lift": 1.871
+    },
+    {
+      "if": [
+        "has_code",
+        "has_math"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0044,
+      "confidence": 0.2488,
+      "lift": 1.84
+    },
+    {
+      "if": [
+        "has_math"
+      ],
+      "then": [
+        "outcome=FAIL"
+      ],
+      "support": 0.0226,
+      "confidence": 0.2478,
+      "lift": 1.833
+    }
+  ],
+  "rules_to_ok": [
+    {
+      "if": [
+        "cluster=1",
+        "source=anthropic-hh"
+      ],
+      "then": [
+        "outcome=OK"
+      ],
+      "support": 0.0938,
+      "confidence": 0.9669,
+      "lift": 1.118
+    },
+    {
+      "if": [
+        "length=short",
+        "source=anthropic-hh"
+      ],
+      "then": [
+        "outcome=OK"
+      ],
+      "support": 0.1159,
+      "confidence": 0.9653,
+      "lift": 1.116
+    },
+    {
+      "if": [
+        "is_question",
+        "source=anthropic-hh"
+      ],
+      "then": [
+        "outcome=OK"
+      ],
+      "support": 0.138,
+      "confidence": 0.9652,
+      "lift": 1.116
+    },
+    {
+      "if": [
+        "cluster=5",
+        "source=anthropic-hh"
+      ],
+      "then": [
+        "outcome=OK"
+      ],
+      "support": 0.0293,
+      "confidence": 0.9641,
+      "lift": 1.115
+    },
+    {
+      "if": [
+        "source=anthropic-hh"
+      ],
+      "then": [
+        "outcome=OK"
+      ],
+      "support": 0.153,
+      "confidence": 0.9635,
+      "lift": 1.114
+    },
+    {
+      "if": [
+        "length=medium",
+        "source=anthropic-hh"
+      ],
+      "then": [
+        "outcome=OK"
+      ],
+      "support": 0.0355,
+      "confidence": 0.958,
+      "lift": 1.108
+    },
+    {
+      "if": [
+        "cluster=3",
+        "source=anthropic-hh"
+      ],
+      "then": [
+        "outcome=OK"
+      ],
+      "support": 0.0104,
+      "confidence": 0.957,
+      "lift": 1.107
+    },
+    {
+      "if": [
+        "length=short",
+        "source=evol_instruct"
+      ],
+      "then": [
+        "outcome=OK"
+      ],
+      "support": 0.0095,
+      "confidence": 0.9532,
+      "lift": 1.102
+    },
+    {
+      "if": [
+        "cluster=12",
+        "source=anthropic-hh"
+      ],
+      "then": [
+        "outcome=OK"
+      ],
+      "support": 0.0136,
+      "confidence": 0.9512,
+      "lift": 1.1
+    }
+  ]
+}

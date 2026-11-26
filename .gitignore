@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+.env
+data/raw/
+data/processed/
+# intermediate models are rebuilt by the pipeline; only the deployable router is kept
+models/*
+!models/router.joblib
+reports/*_scores.parquet
+logs/

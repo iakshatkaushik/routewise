@@ -1,0 +1,21 @@
+# Render Blueprint: New > Blueprint > pick this repository.
+# The free plan has 512 MB of memory, so it runs ROUTER_MODE=light (logistic regression only,
+# ~270 MB measured locally). On a plan with 1 GB or more, set ROUTER_MODE=full for the stacked
+# router with the embedding network (~500 MB measured locally).
+services:
+  - type: web
+    name: routewise
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: ROUTER_MODE
+        value: light
+      - key: LLM_API_KEY
+        sync: false          # set it in the Render dashboard; leave empty for the routing-only demo
+      - key: LLM_BASE_URL
+        value: https://api.groq.com/openai/v1
+      - key: CHEAP_MODEL
+        value: openai/gpt-oss-20b
+      - key: STRONG_MODEL
+        value: openai/gpt-oss-120b

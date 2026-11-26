@@ -1,0 +1,39 @@
+{
+  "ablation": {
+    "word_only": {
+      "val_auc": 0.7544,
+      "n_features": 60025,
+      "seconds": 99.8
+    },
+    "char_only": {
+      "val_auc": 0.7466,
+      "n_features": 60025,
+      "seconds": 87.3
+    },
+    "word+char": {
+      "val_auc": 0.7527,
+      "n_features": 120024,
+      "seconds": 86.4
+    },
+    "word+char+stats": {
+      "val_auc": 0.7552,
+      "n_features": 120024,
+      "seconds": 106.7
+    },
+    "small_vocab_20k": {
+      "val_auc": 0.7522,
+      "n_features": 40024,
+      "seconds": 102.4
+    },
+    "large_vocab_150k": {
+      "val_auc": 0.7572,
+      "n_features": 300024,
+      "seconds": 149.5
+    }
+  },
+  "chosen": "large_vocab_150k",
+  "n_features": 300024,
+  "svd_components": 256,
+  "svd_explained_variance": 0.915389895439148,
+  "svd_seconds": 176.2
+}

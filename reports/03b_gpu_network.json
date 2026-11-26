@@ -1,0 +1,94 @@
+{
+  "grid": [
+    {
+      "hidden": "(512,)",
+      "dropout": "0.2",
+      "lr": "0.001",
+      "val_auc": 0.7526,
+      "best_epoch": 2,
+      "seconds": 2.7
+    },
+    {
+      "hidden": "(512,)",
+      "dropout": "0.2",
+      "lr": "0.0003",
+      "val_auc": 0.7573,
+      "best_epoch": 4,
+      "seconds": 1.0
+    },
+    {
+      "hidden": "(512,)",
+      "dropout": "0.4",
+      "lr": "0.001",
+      "val_auc": 0.7536,
+      "best_epoch": 3,
+      "seconds": 0.9
+    },
+    {
+      "hidden": "(512,)",
+      "dropout": "0.4",
+      "lr": "0.0003",
+      "val_auc": 0.76,
+      "best_epoch": 8,
+      "seconds": 1.4
+    },
+    {
+      "hidden": "(1024, 256)",
+      "dropout": "0.2",
+      "lr": "0.001",
+      "val_auc": 0.7542,
+      "best_epoch": 4,
+      "seconds": 3.4
+    },
+    {
+      "hidden": "(1024, 256)",
+      "dropout": "0.2",
+      "lr": "0.0003",
+      "val_auc": 0.7519,
+      "best_epoch": 3,
+      "seconds": 2.6
+    },
+    {
+      "hidden": "(1024, 256)",
+      "dropout": "0.4",
+      "lr": "0.001",
+      "val_auc": 0.7567,
+      "best_epoch": 6,
+      "seconds": 3.5
+    },
+    {
+      "hidden": "(1024, 256)",
+      "dropout": "0.4",
+      "lr": "0.0003",
+      "val_auc": 0.7576,
+      "best_epoch": 7,
+      "seconds": 3.8
+    }
+  ],
+  "best": {
+    "hidden": "(512,)",
+    "dropout": "0.4",
+    "lr": "0.0003"
+  },
+  "best_epoch": 8,
+  "activation_functions": {
+    "logistic": {
+      "val_auc": 0.7397,
+      "epochs": 35
+    },
+    "tanh": {
+      "val_auc": 0.7611,
+      "epochs": 32
+    },
+    "relu": {
+      "val_auc": 0.76,
+      "epochs": 8
+    },
+    "gelu": {
+      "val_auc": 0.7594,
+      "epochs": 8
+    }
+  },
+  "test_auc": 0.7688889532797047,
+  "test_apgr": 0.6837512846865366
+}

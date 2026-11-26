@@ -1,0 +1,11 @@
+.venv
+data
+tests
+scripts
+notebooks
+**/__pycache__
+models/*
+!models/router.joblib
+reports/*.parquet
+.git
+.env

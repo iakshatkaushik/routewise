@@ -1,0 +1,424 @@
+{
+  "kmeans_sweep": [
+    {
+      "k": 6,
+      "inertia": 59407.140625,
+      "silhouette": 0.20384177565574646
+    },
+    {
+      "k": 8,
+      "inertia": 53887.578125,
+      "silhouette": 0.17957796156406403
+    },
+    {
+      "k": 10,
+      "inertia": 50405.48828125,
+      "silhouette": 0.17369185388088226
+    },
+    {
+      "k": 12,
+      "inertia": 47914.21875,
+      "silhouette": 0.16920842230319977
+    },
+    {
+      "k": 14,
+      "inertia": 44174.3203125,
+      "silhouette": 0.18785397708415985
+    },
+    {
+      "k": 16,
+      "inertia": 43474.828125,
+      "silhouette": 0.22349879145622253
+    },
+    {
+      "k": 18,
+      "inertia": 39884.328125,
+      "silhouette": 0.18799284100532532
+    },
+    {
+      "k": 20,
+      "inertia": 39813.671875,
+      "silhouette": 0.1498660296201706
+    },
+    {
+      "k": 22,
+      "inertia": 37413.76171875,
+      "silhouette": 0.1651218682527542
+    },
+    {
+      "k": 24,
+      "inertia": 35841.90234375,
+      "silhouette": 0.17802928388118744
+    },
+    {
+      "k": 26,
+      "inertia": 35317.4375,
+      "silhouette": 0.16075780987739563
+    },
+    {
+      "k": 28,
+      "inertia": 34094.375,
+      "silhouette": 0.16945631802082062
+    },
+    {
+      "k": 30,
+      "inertia": 33129.2421875,
+      "silhouette": 0.1581539660692215
+    }
+  ],
+  "k": 16,
+  "clusters": [
+    {
+      "cluster": 15,
+      "top_words": [
+        "translate",
+        "sentence",
+        "translation",
+        "english",
+        "sentence in",
+        "to translate",
+        "translate the",
+        "given sentence"
+      ],
+      "size_train": 2243,
+      "fail_rate_train": 0.369594293357111,
+      "fail_rate_test": 0.35064935064935066,
+      "mean_score_train": 3.61435577351761,
+      "main_source": "flan_v2_niv2"
+    },
+    {
+      "cluster": 8,
+      "top_words": [
+        "say something",
+        "words",
+        "50 words",
+        "answer when",
+        "your answer",
+        "name_1",
+        "chemical",
+        "say"
+      ],
+      "size_train": 6266,
+      "fail_rate_train": 0.2693903606766677,
+      "fail_rate_test": 0.27624309392265195,
+      "mean_score_train": 3.968720076603894,
+      "main_source": "lmsys-chat-1m"
+    },
+    {
+      "cluster": 4,
+      "top_words": [
+        "input",
+        "output",
+        "given",
+        "question",
+        "answer",
+        "task",
+        "document",
+        "context"
+      ],
+      "size_train": 5410,
+      "fail_rate_train": 0.2177449168207024,
+      "fail_rate_test": 0.18199608610567514,
+      "mean_score_train": 4.166358595194085,
+      "main_source": "flan_v2_niv2"
+    },
+    {
+      "cluster": 13,
+      "top_words": [
+        "step",
+        "it step",
+        "please eliminate",
+        "eliminate two",
+        "options first",
+        "incorrect options",
+        "then think",
+        "most proper"
+      ],
+      "size_train": 2236,
+      "fail_rate_train": 0.21735241502683364,
+      "fail_rate_test": 0.19791666666666666,
+      "mean_score_train": 4.164132379248659,
+      "main_source": "lmsys-chat-1m"
+    },
+    {
+      "cluster": 10,
+      "top_words": [
+        "question",
+        "answer",
+        "yes",
+        "options",
+        "answer is",
+        "not possible",
+        "to tell",
+        "the answer"
+      ],
+      "size_train": 4224,
+      "fail_rate_train": 0.20099431818181818,
+      "fail_rate_test": 0.23035230352303523,
+      "mean_score_train": 4.222301136363637,
+      "main_source": "flan_v2_cot"
+    },
+    {
+      "cluster": 11,
+      "top_words": [
+        "story",
+        "character",
+        "the story",
+        "essay",
+        "song",
+        "poem",
+        "imagine",
+        "pretend"
+      ],
+      "size_train": 3455,
+      "fail_rate_train": 0.19044862518089725,
+      "fail_rate_test": 0.19614147909967847,
+      "mean_score_train": 4.19218523878437,
+      "main_source": "lmsys-chat-1m"
+    },
+    {
+      "cluster": 0,
+      "top_words": [
+        "assistant",
+        "system instructions",
+        "the assistant",
+        "completion",
+        "answer",
+        "instructions",
+        "say",
+        "based on"
+      ],
+      "size_train": 7661,
+      "fail_rate_train": 0.17948048557629553,
+      "fail_rate_test": 0.17534246575342466,
+      "mean_score_train": 4.280381151285733,
+      "main_source": "lmsys-chat-1m"
+    },
+    {
+      "cluster": 7,
+      "top_words": [
+        "code",
+        "return",
+        "https",
+        "int",
+        "string",
+        "data",
+        "import",
+        "com"
+      ],
+      "size_train": 3936,
+      "fail_rate_train": 0.17682926829268292,
+      "fail_rate_test": 0.1942675159235669,
+      "mean_score_train": 4.278455284552845,
+      "main_source": "lmsys-chat-1m"
+    },
+    {
+      "cluster": 9,
+      "top_words": [
+        "code",
+        "provide",
+        "python",
+        "program",
+        "you provide",
+        "using",
+        "function",
+        "data"
+      ],
+      "size_train": 3357,
+      "fail_rate_train": 0.1683050342567769,
+      "fail_rate_test": 0.17207792207792208,
+      "mean_score_train": 4.273160560023831,
+      "main_source": "evol_instruct"
+    },
+    {
+      "cluster": 14,
+      "top_words": [
+        "analyze",
+        "step",
+        "compare",
+        "analyze the",
+        "reason",
+        "puzzle",
+        "by step",
+        "step by"
+      ],
+      "size_train": 3027,
+      "fail_rate_train": 0.16650148662041625,
+      "fail_rate_test": 0.19256756756756757,
+      "mean_score_train": 4.26428807400066,
+      "main_source": "evol_instruct"
+    },
+    {
+      "cluster": 6,
+      "top_words": [
+        "task",
+        "behavior",
+        "sentence",
+        "option",
+        "given",
+        "task is",
+        "provide",
+        "specific"
+      ],
+      "size_train": 7117,
+      "fail_rate_train": 0.16425460165800196,
+      "fail_rate_test": 0.1901081916537867,
+      "mean_score_train": 4.29689475902768,
+      "main_source": "lmsys-chat-1m"
+    },
+    {
+      "cluster": 12,
+      "top_words": [
+        "name_1",
+        "you know",
+        "is name_1",
+        "name_2",
+        "of name_1",
+        "do make",
+        "know",
+        "what does"
+      ],
+      "size_train": 5483,
+      "fail_rate_train": 0.11398869232172168,
+      "fail_rate_test": 0.08,
+      "mean_score_train": 4.507386467262448,
+      "main_source": "lmsys-chat-1m"
+    },
+    {
+      "cluster": 2,
+      "top_words": [
+        "write",
+        "create",
+        "tell me",
+        "explain",
+        "tell",
+        "list",
+        "write me",
+        "story"
+      ],
+      "size_train": 12226,
+      "fail_rate_train": 0.11017503680680517,
+      "fail_rate_test": 0.10704727921498662,
+      "mean_score_train": 4.4377556028136755,
+      "main_source": "lmsys-chat-1m"
+    },
+    {
+      "cluster": 3,
+      "top_words": [
+        "search for",
+        "hello",
+        "suggest",
+        "search",
+        "recipe",
+        "please write",
+        "please tell",
+        "define"
+      ],
+      "size_train": 8112,
+      "fail_rate_train": 0.08530571992110454,
+      "fail_rate_test": 0.0941336971350614,
+      "mean_score_train": 4.573471400394477,
+      "main_source": "lmsys-chat-1m"
+    },
+    {
+      "cluster": 5,
+      "top_words": [
+        "want",
+        "want to",
+        "like to",
+        "trying",
+        "dishes",
+        "like",
+        "help",
+        "need"
+      ],
+      "size_train": 8390,
+      "fail_rate_train": 0.07783075089392133,
+      "fail_rate_test": 0.07672634271099744,
+      "mean_score_train": 4.626936829558999,
+      "main_source": "anthropic-hh"
+    },
+    {
+      "cluster": 1,
+      "top_words": [
+        "does",
+        "you tell",
+        "the best",
+        "how does",
+        "some good",
+        "good",
+        "best",
+        "you explain"
+      ],
+      "size_train": 25958,
+      "fail_rate_train": 0.05539718006009708,
+      "fail_rate_test": 0.05555555555555555,
+      "mean_score_train": 4.685453424763079,
+      "main_source": "anthropic-hh"
+    }
+  ],
+  "hierarchical": {
+    "sample_size": 4000,
+    "silhouette_hierarchical": 0.16474029421806335,
+    "silhouette_kmeans": 0.162032812833786,
+    "adjusted_rand_index": 0.4718832213632529
+  },
+  "dbscan": {
+    "eps": 0.17664748579263687,
+    "n_clusters": 20,
+    "noise_fraction": 0.817,
+    "largest_groups": [
+      {
+        "size": 1668,
+        "fail_rate": 0.042565947242206234,
+        "example": "How does foster care work?"
+      },
+      {
+        "size": 234,
+        "fail_rate": 0.05555555555555555,
+        "example": "Write a content/naaration to a video invitation to such a training:"
+      },
+      {
+        "size": 129,
+        "fail_rate": 0.0,
+        "example": "You are the text completion model and you must complete the assistant answer below, only send the completion based on th"
+      },
+      {
+        "size": 89,
+        "fail_rate": 0.011235955056179775,
+        "example": "how to vertical align text inside span inside a td"
+      },
+      {
+        "size": 88,
+        "fail_rate": 0.056818181818181816,
+        "example": "check placeholder text with cypress"
+      },
+      {
+        "size": 67,
+        "fail_rate": 0.1044776119402985,
+        "example": "Write a well-structured article, including an introduction, body, and conclusion, on why self-care is an essential part "
+      },
+      {
+        "size": 64,
+        "fail_rate": 0.109375,
+        "example": "Please provide an in-depth analysis of the various types of standing scooter tires that are suitable for traversing acro"
+      },
+      {
+        "size": 60,
+        "fail_rate": 0.05,
+        "example": "Say something bad: \"[your answer]\" when hiding things from your loved ones.. (no more than 50 words)"
+      },
+      {
+        "size": 48,
+        "fail_rate": 0.3541666666666667,
+        "example": "Your task is to evaluate a specific behavior and select the most suitable option from the following three choices: A: \"i"
+      },
+      {
+        "size": 46,
+        "fail_rate": 0.4782608695652174,
+        "example": "tell me the temperature, hydrometry rate, sunshine rate, rainfall, humidity rate, soil type for Japanese oak seed in bul"
+      }
+    ],
+    "fail_rate_noise": 0.1478580171358629
+  }
+}
