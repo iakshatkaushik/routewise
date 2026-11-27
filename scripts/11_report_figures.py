@@ -114,7 +114,7 @@ def fig_architecture():
     box(ax, 0.35, 0.53, 0.17, 0.32, "Distilled transformer",
         f"bge-small, 33M params\nint8 ONNX, {perf['text_model_mb']:.1f} MB\nruns on 1 CPU core", STRONG, filled=True)
     box(ax, 0.56, 0.58, 0.14, 0.22, "Stacker", "logistic regression\n= P(cheap fails)", SKY)
-    box(ax, 0.74, 0.58, 0.12, 0.22, "Threshold", "set by the\nbudget slider", AMBER)
+    box(ax, 0.74, 0.58, 0.12, 0.22, "Threshold", "set by the\nbudget lever", AMBER)
     box(ax, 0.89, 0.74, 0.11, 0.18, "Cheap LLM", "gpt-oss-20b", CHEAP, filled=True)
     box(ax, 0.89, 0.44, 0.11, 0.18, "Strong LLM", "gpt-oss-120b", STRONG, filled=True)
     for a, b in [((0.13, 0.69), (0.17, 0.69)), ((0.31, 0.69), (0.35, 0.69)), ((0.52, 0.69), (0.56, 0.69)),
@@ -441,7 +441,7 @@ def fig_budget():
     a1.plot([0, 100], [0, 100], color=SLATE, ls="--", lw=1)
     a1.scatter(req, got, s=60, color=AMBER, ec="white", lw=1.5, zorder=3)
     a1.set(xlabel="requested strong-model share (%)", ylabel="share actually sent on test (%)")
-    a1.set_title("The budget slider keeps its promise")
+    a1.set_title("Requested and realised budget")
     shares = [0, 20, 30, 50, 100]
     qual = [R["quality_cheap_only"]] + [R[f"at_{s}pct"]["quality"] for s in (20, 30, 50)] + [R["quality_strong_only"]]
     a2.plot(shares, qual, color=STRONG, lw=2.6, marker="o", ms=7, mfc="white", mew=2)
@@ -450,7 +450,7 @@ def fig_budget():
     a2.axhline(R["quality_cheap_only"], color=CHEAP, ls=":", lw=1.2)
     a2.text(100, R["quality_cheap_only"] + 0.01, "cheap model only", color=CHEAP, ha="right", fontsize=8.5)
     a2.set(xlabel="strong-model share (%)", ylabel="average grade (out of 5)", ylim=(4.35, 5.08))
-    a2.set_title("Quality bought per % of budget")
+    a2.set_title("Average grade at each budget")
     save(fig, "fig11_budget_and_quality.png")
 
 
@@ -550,7 +550,7 @@ def fig_features():
     vals = [ab[n]["val_auc"] for n in names]
     cols = [AMBER if n == S["features"]["chosen"] else SKY for n in names]
     a1.bar(range(len(names)), vals, color=cols, width=0.6, zorder=3)
-    a1.set_xticks(range(len(names)), [n.replace("_", " ").replace("+", "+\n") for n in names], fontsize=8)
+    a1.set_xticks(range(len(names)), [n.replace("_", " ").replace("+", "+\n").replace(" vocab ", "\nvocab\n") for n in names], fontsize=8)
     a1.set_ylim(min(vals) - 0.004, max(vals) + 0.003)
     for i, v in enumerate(vals):
         a1.text(i, v + 0.0004, f"{v:.4f}", ha="center", fontsize=8)
@@ -584,12 +584,13 @@ SOURCES = [("lmsys-chat-1m", 3144, 0.761, 0.788), ("sharegpt", 2027, 0.706, 0.79
 
 def fig_breakdowns():
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 4.2))
+    fig.subplots_adjust(wspace=0.5)
     g = [r[0] for r in GRADE_RISK]
     a1.bar(g, [r[3] * 100 for r in GRADE_RISK], color=[CORAL, CORAL, AMBER, SKY, CHEAP], width=0.6, zorder=3)
     for r in GRADE_RISK:
         a1.text(r[0], r[3] * 100 + 2, f"{r[3]:.0%}", ha="center", fontsize=9, fontweight="bold")
     a1.set(xlabel="true grade of the cheap answer", ylabel="% sent to the strong model (30% budget)", ylim=(0, 95))
-    a1.set_title("The worst answers are caught most often")
+    a1.set_title("Share sent to the strong model, by true grade")
     a1.grid(axis="x", visible=False)
     y = np.arange(len(SOURCES))[::-1]
     a2.scatter([s[2] for s in SOURCES], y, color=SKY, s=60, zorder=3, label="logistic regression")
@@ -598,7 +599,7 @@ def fig_breakdowns():
         a2.annotate("", (s[3], yi), (s[2], yi), arrowprops=dict(arrowstyle="-|>", color=SLATE, lw=1.2))
     a2.set_yticks(y, [f"{s[0]} ({s[1]:,})" for s in SOURCES], fontsize=8.6)
     a2.set_xlabel("test AUC within the source")
-    a2.set_title("Better on every large data source")
+    a2.set_title("Test AUC by data source")
     a2.legend(fontsize=8.5, loc="lower right")
     save(fig, "fig17_test_breakdowns.png")
 
