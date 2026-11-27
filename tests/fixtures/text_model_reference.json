@@ -1,0 +1,38 @@
+{
+ "max_tokens": 512,
+ "onnx": "text_router.onnx",
+ "prompts": [
+  "Write a haiku about autumn.",
+  "Prove that there are infinitely many primes.",
+  "Fix this bug: def add(a, b): return a - b",
+  "hi",
+  "extract entities and group them by entity type from following text in dictionary format :\nYes Bank-DHFL loan fraud case: HC allows trials in CBI, ED cases against NAME_1 by spl PMLA court\nThe Bombay High Court on Thursday allowed trials in the Central Bureau of Investigation (CBI) and Enforcement Directorate (ED) cases against Yes Bank founder NAME_2 and NAME_3 Housing Finance Limited (DHFL) promoter NAME_4 to be conducted together before a special PMLA court.\nA single bench of Justice NAME_5 passed an order in pleas moved by NAME_6, challenging the sessions court\u2019s order to transfer the CBI case trial to the special PMLA court. The accused had approached the Principal Judge (PJ) sessions court, urging transfer of the cases. The PJ court, however, noted that only probing agencies could make such a request or plea, and not the accused, and said \u2018such a request could be made before the special CBI court judge, where the schedule or predicate offence was being tried\u2019. The ED then approached the special CBI court seeking to transfer the trial, which the PJ court rejected in July 2021.",
+  "During the World War II, where was the Canadian exile government located?"
+ ],
+ "logits": [
+  [
+   -3.1748759746551514,
+   -2.4907350540161133
+  ],
+  [
+   -3.2402288913726807,
+   -2.821187973022461
+  ],
+  [
+   -1.938452959060669,
+   -2.0480260848999023
+  ],
+  [
+   -1.2574410438537598,
+   -1.3497810363769531
+  ],
+  [
+   -0.014898999594151974,
+   -0.29776498675346375
+  ],
+  [
+   -1.8710390329360962,
+   -1.7204389572143555
+  ]
+ ]
+}

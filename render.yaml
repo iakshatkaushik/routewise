@@ -1,7 +1,8 @@
 # Render Blueprint: New > Blueprint > pick this repository.
-# The free plan has 512 MB of memory, so it runs ROUTER_MODE=light (logistic regression only,
-# ~270 MB measured locally). On a plan with 1 GB or more, set ROUTER_MODE=full for the stacked
-# router with the embedding network (~500 MB measured locally).
+# The free plan has 512 MB of memory, so it runs ROUTER_MODE=light (Ridge regression on TF-IDF features;
+# the server used ~255 MB, peak 263 MB, in reports/10_server_memory.json). On a plan with 1 GB or more,
+# set ROUTER_MODE=full for the router with the fine-tuned transformer (~369 MB, peak 508 MB in the same file:
+# too close to 512 MB to be safe on the free plan).
 services:
   - type: web
     name: routewise

@@ -532,7 +532,7 @@
         "dropout": "0.4",
         "lr": "0.0003",
         "epochs": "8",
-        "device": "mps"
+        "device": "gpu"
       },
       "val_auc": 0.76,
       "test": {
@@ -577,6 +577,204 @@
       "predict_ms_per_1k": 1.22,
       "trained_on_rows": 109101,
       "input": "384-dim bge-small embedding + 24 prompt stats"
+    },
+    "Fine-tuned Transformer (GPU)": {
+      "best_params": {
+        "epochs": "4",
+        "batch_size": "64",
+        "lr": "8e-05",
+        "weight_decay": "0.01",
+        "warmup": "0.06",
+        "deficit_weight": "1.0",
+        "base": "BAAI/bge-small-en-v1.5",
+        "max_tokens": "512",
+        "device": "cuda",
+        "precision": "bf16"
+      },
+      "val_auc": 0.8016,
+      "test": {
+        "roc_auc": 0.805400255449194,
+        "threshold": 0.13667744398117065,
+        "accuracy": 0.7527,
+        "precision": 0.31055480378890393,
+        "recall_sensitivity": 0.6784922394678492,
+        "specificity": 0.7643113218457268,
+        "f1": 0.42608493850081225,
+        "confusion_matrix": {
+          "tn": 6609,
+          "fp": 2038,
+          "fn": 435,
+          "tp": 918
+        }
+      },
+      "routing": {
+        "apgr": 0.7110260363138061,
+        "cpt50": 0.23,
+        "cpt80": 0.51,
+        "cpt90": 0.68,
+        "quality_cheap_only": 4.4162,
+        "quality_strong_only": 5.0,
+        "at_20pct": {
+          "strong_share": 0.2,
+          "quality": 4.6877,
+          "pgr": 0.4650565262076062
+        },
+        "at_30pct": {
+          "strong_share": 0.3,
+          "quality": 4.7661,
+          "pgr": 0.5993490921548472
+        },
+        "at_50pct": {
+          "strong_share": 0.5,
+          "quality": 4.8801,
+          "pgr": 0.7946214457005818
+        }
+      },
+      "fit_seconds": 235.7,
+      "predict_ms_per_1k": 119.52,
+      "trained_on_rows": 87280,
+      "input": "raw prompt text (first 512 tokens), fine-tuned BAAI/bge-small-en-v1.5",
+      "pytorch": {
+        "val_auc": 0.8037,
+        "test": {
+          "roc_auc": 0.8078238431385019,
+          "threshold": 0.13939638435840607,
+          "accuracy": 0.7531,
+          "precision": 0.3122476446837147,
+          "recall_sensitivity": 0.6858832224685883,
+          "specificity": 0.7636174395744189,
+          "f1": 0.4291329479768786,
+          "confusion_matrix": {
+            "tn": 6603,
+            "fp": 2044,
+            "fn": 425,
+            "tp": 928
+          }
+        },
+        "routing": {
+          "apgr": 0.7135748544021927,
+          "cpt50": 0.23,
+          "cpt80": 0.51,
+          "cpt90": 0.67,
+          "quality_cheap_only": 4.4162,
+          "quality_strong_only": 5.0,
+          "at_20pct": {
+            "strong_share": 0.2,
+            "quality": 4.6902,
+            "pgr": 0.4693388146625556
+          },
+          "at_30pct": {
+            "strong_share": 0.3,
+            "quality": 4.7684,
+            "pgr": 0.6032887975334015
+          },
+          "at_50pct": {
+            "strong_share": 0.5,
+            "quality": 4.8801,
+            "pgr": 0.7946214457005818
+          }
+        }
+      },
+      "served_as": "ONNX int8, CPU, one prompt at a time"
+    },
+    "Fine-tuned Transformer (GPU), score-deficit head": {
+      "best_params": {
+        "epochs": "4",
+        "batch_size": "64",
+        "lr": "8e-05",
+        "weight_decay": "0.01",
+        "warmup": "0.06",
+        "deficit_weight": "1.0",
+        "base": "BAAI/bge-small-en-v1.5",
+        "max_tokens": "512",
+        "device": "cuda",
+        "precision": "bf16"
+      },
+      "val_auc": 0.7971,
+      "test": {
+        "roc_auc": 0.8022107304559698,
+        "threshold": 0.154279887676239,
+        "accuracy": 0.7508,
+        "precision": 0.3093404753933713,
+        "recall_sensitivity": 0.6829268292682927,
+        "specificity": 0.7614201457152769,
+        "f1": 0.4258064516129032,
+        "confusion_matrix": {
+          "tn": 6584,
+          "fp": 2063,
+          "fn": 429,
+          "tp": 924
+        }
+      },
+      "routing": {
+        "apgr": 0.714068174032203,
+        "cpt50": 0.23,
+        "cpt80": 0.5,
+        "cpt90": 0.67,
+        "quality_cheap_only": 4.4162,
+        "quality_strong_only": 5.0,
+        "at_20pct": {
+          "strong_share": 0.2,
+          "quality": 4.6883,
+          "pgr": 0.46608427543679337
+        },
+        "at_30pct": {
+          "strong_share": 0.3,
+          "quality": 4.7693,
+          "pgr": 0.6048304213771846
+        },
+        "at_50pct": {
+          "strong_share": 0.5,
+          "quality": 4.8838,
+          "pgr": 0.8009592326139088
+        }
+      },
+      "fit_seconds": 235.7,
+      "predict_ms_per_1k": 119.52,
+      "trained_on_rows": 87280,
+      "input": "raw prompt text (first 512 tokens), fine-tuned BAAI/bge-small-en-v1.5",
+      "pytorch": {
+        "val_auc": 0.7981,
+        "test": {
+          "roc_auc": 0.8025264306492536,
+          "threshold": 0.1550784707069397,
+          "accuracy": 0.7485,
+          "precision": 0.3073607427055703,
+          "recall_sensitivity": 0.6851441241685144,
+          "specificity": 0.7584133225396091,
+          "f1": 0.4243533989471275,
+          "confusion_matrix": {
+            "tn": 6558,
+            "fp": 2089,
+            "fn": 426,
+            "tp": 927
+          }
+        },
+        "routing": {
+          "apgr": 0.7154008221993835,
+          "cpt50": 0.22,
+          "cpt80": 0.51,
+          "cpt90": 0.67,
+          "quality_cheap_only": 4.4162,
+          "quality_strong_only": 5.0,
+          "at_20pct": {
+            "strong_share": 0.2,
+            "quality": 4.6915,
+            "pgr": 0.47156560465912917
+          },
+          "at_30pct": {
+            "strong_share": 0.3,
+            "quality": 4.7694,
+            "pgr": 0.6050017129153822
+          },
+          "at_50pct": {
+            "strong_share": 0.5,
+            "quality": 4.8832,
+            "pgr": 0.7999314833847215
+          }
+        }
+      },
+      "served_as": "ONNX int8, CPU, one prompt at a time"
     }
   },
   "activation_functions": {

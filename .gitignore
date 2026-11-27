@@ -9,5 +9,15 @@ data/processed/
 # intermediate models are rebuilt by the pipeline; only the deployable router is kept
 models/*
 !models/router.joblib
+!models/text_router.onnx
+!models/text_tokenizer.json
 reports/*_scores.parquet
 logs/
+# local hand-off files and course template (not part of the repository)
+routewise_update.tar.gz
+routewise_handoff.md
+ML Project Report Format.docx
+# presentation template (third-party design, not ours to publish)
+Blue Modern*
+# working copies of the deliverables (the published copies live in docs/)
+/RouteWise_*

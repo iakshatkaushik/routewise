@@ -6,6 +6,15 @@ notebooks
 **/__pycache__
 models/*
 !models/router.joblib
+!models/text_router.onnx
+!models/text_tokenizer.json
 reports/*.parquet
 .git
 .env
+logs
+docs
+*.docx
+*.pptx
+*.pdf
+*.tar.gz
+*.md

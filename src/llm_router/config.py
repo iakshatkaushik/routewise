@@ -22,4 +22,7 @@ STRONG_SCORE = 5.0
 MAX_PROMPT_CHARS = 4000
 
 for _p in (DATA_PROCESSED, MODELS, FIGURES):
-    _p.mkdir(parents=True, exist_ok=True)
+    try:
+        _p.mkdir(parents=True, exist_ok=True)
+    except OSError:      # read-only deployment image: the web service only reads these folders
+        pass

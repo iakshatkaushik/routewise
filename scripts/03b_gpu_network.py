@@ -1,7 +1,7 @@
 """Step 3b - neural network on sentence embeddings, trained on the GPU (ANN unit).
 
 Input: 384-dim bge-small sentence embedding + the 24 standardised prompt statistics.
-Model: PyTorch MLP trained on Apple-Silicon GPU ("mps") with class-balanced BCE loss,
+Model: PyTorch MLP trained on the GPU with class-balanced BCE loss,
 AdamW, cosine learning-rate schedule and early stopping on validation AUC.
 Same protocol as step 3: tune on the validation split, refit on all training data for the
 best number of epochs, score once on test. Results are appended to step 3's reports.

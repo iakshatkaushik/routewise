@@ -1,6 +1,6 @@
 {
   "model": "BAAI/bge-small-en-v1.5",
-  "device": "mps",
+  "device": "gpu",
   "dims": 384,
   "train": {
     "rows": 109101,

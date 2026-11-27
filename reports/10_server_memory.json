@@ -1,0 +1,15 @@
+{
+  "light": {
+    "rss_mb_after_start": 254.0,
+    "rss_mb": 254.8,
+    "peak_rss_mb": 262.6,
+    "requests": 20
+  },
+  "full": {
+    "rss_mb_after_start": 348.7,
+    "rss_mb": 368.8,
+    "peak_rss_mb": 508.3,
+    "requests": 20
+  },
+  "platform": "Linux x86_64, Python 3.13.16"
+}

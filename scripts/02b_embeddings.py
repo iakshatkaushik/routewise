@@ -1,4 +1,4 @@
-"""Step 2b - neural sentence embeddings on the GPU (Apple Silicon "mps", CUDA, or CPU fallback).
+"""Step 2b - neural sentence embeddings on the GPU (CPU fallback).
 
 Model: BAAI/bge-small-en-v1.5 (33M parameters, 384-dim, L2-normalised). The same model is
 available as ONNX through `fastembed`, which is how the web service computes it on a CPU;
@@ -17,11 +17,7 @@ MODEL = "BAAI/bge-small-en-v1.5"
 
 
 def device():
-    if torch.backends.mps.is_available():
-        return "mps"
-    if torch.cuda.is_available():
-        return "cuda"
-    return "cpu"
+    return "cuda" if torch.cuda.is_available() else "cpu"
 
 
 if __name__ == "__main__":

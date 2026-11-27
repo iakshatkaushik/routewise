@@ -1,0 +1,153 @@
+{
+  "base": "BAAI/bge-small-en-v1.5",
+  "max_tokens": 512,
+  "seed": 42,
+  "precision": "bf16",
+  "epochs": 4,
+  "batch_size": 64,
+  "lr": 8e-05,
+  "weight_decay": 0.01,
+  "warmup": 0.06,
+  "deficit_weight": 1.0,
+  "device": "cuda",
+  "pooling": "mean",
+  "ema": 0.0,
+  "grad_ckpt": false,
+  "lora_r": 0,
+  "num_layers": 0,
+  "n_folds": 0,
+  "fold": -1,
+  "teacher": "models/teacher/teacher_oof_qwen3_4b.npz",
+  "distill_alpha": 0.1,
+  "trained_on_rows": 87280,
+  "params_millions": 33.4,
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "train_minutes": 3.93,
+  "best_checkpoint": {
+    "step": 5456,
+    "epoch": 4.0,
+    "val_auc_fail": 0.8037,
+    "val_auc_deficit": 0.7981,
+    "val_apgr_fail": 0.7095,
+    "val_apgr_deficit": 0.7116,
+    "minutes": 3.87
+  },
+  "history": [
+    {
+      "step": 682,
+      "epoch": 0.5,
+      "select": 0.7826,
+      "val_auc_fail": 0.7826,
+      "val_auc_deficit": 0.7779,
+      "val_apgr_fail": 0.6937,
+      "val_apgr_deficit": 0.6952,
+      "minutes": 0.5,
+      "best_so_far": true
+    },
+    {
+      "step": 1364,
+      "epoch": 1.0,
+      "select": 0.7937,
+      "val_auc_fail": 0.7937,
+      "val_auc_deficit": 0.7888,
+      "val_apgr_fail": 0.7021,
+      "val_apgr_deficit": 0.704,
+      "minutes": 0.98,
+      "best_so_far": true
+    },
+    {
+      "step": 2046,
+      "epoch": 1.5,
+      "select": 0.7975,
+      "val_auc_fail": 0.7975,
+      "val_auc_deficit": 0.7922,
+      "val_apgr_fail": 0.7036,
+      "val_apgr_deficit": 0.7062,
+      "minutes": 1.46,
+      "best_so_far": true
+    },
+    {
+      "step": 2728,
+      "epoch": 2.0,
+      "select": 0.7993,
+      "val_auc_fail": 0.7993,
+      "val_auc_deficit": 0.7945,
+      "val_apgr_fail": 0.7057,
+      "val_apgr_deficit": 0.708,
+      "minutes": 1.92,
+      "best_so_far": true
+    },
+    {
+      "step": 3410,
+      "epoch": 2.5,
+      "select": 0.8013,
+      "val_auc_fail": 0.8013,
+      "val_auc_deficit": 0.795,
+      "val_apgr_fail": 0.7082,
+      "val_apgr_deficit": 0.7098,
+      "minutes": 2.41,
+      "best_so_far": true
+    },
+    {
+      "step": 4092,
+      "epoch": 3.0,
+      "select": 0.8022,
+      "val_auc_fail": 0.8022,
+      "val_auc_deficit": 0.7971,
+      "val_apgr_fail": 0.7084,
+      "val_apgr_deficit": 0.7108,
+      "minutes": 2.89,
+      "best_so_far": true
+    },
+    {
+      "step": 4774,
+      "epoch": 3.5,
+      "select": 0.8027,
+      "val_auc_fail": 0.8027,
+      "val_auc_deficit": 0.7967,
+      "val_apgr_fail": 0.709,
+      "val_apgr_deficit": 0.711,
+      "minutes": 3.38,
+      "best_so_far": true
+    },
+    {
+      "step": 5456,
+      "epoch": 4.0,
+      "select": 0.8037,
+      "val_auc_fail": 0.8037,
+      "val_auc_deficit": 0.7981,
+      "val_apgr_fail": 0.7095,
+      "val_apgr_deficit": 0.7116,
+      "minutes": 3.87,
+      "best_so_far": true
+    }
+  ],
+  "finished": "2026-11-26 21:17:25",
+  "hyperparameters": {
+    "epochs": 4,
+    "batch_size": 64,
+    "lr": 8e-05,
+    "weight_decay": 0.01,
+    "warmup": 0.06,
+    "deficit_weight": 1.0
+  },
+  "results": {
+    "Fine-tuned Transformer (GPU)": {
+      "val_auc": 0.8037,
+      "val_apgr": 0.7095,
+      "test_auc": 0.8078238431385019,
+      "test_apgr": 0.7135748544021927,
+      "test_cpt50": 0.23,
+      "test_cpt80": 0.51
+    },
+    "Fine-tuned Transformer (GPU), score-deficit head": {
+      "val_auc": 0.7981,
+      "val_apgr": 0.7116,
+      "test_auc": 0.8025264306492536,
+      "test_apgr": 0.7154008221993835,
+      "test_cpt50": 0.22,
+      "test_cpt80": 0.51
+    }
+  },
+  "note": "Probabilities in the score tables come from PyTorch here; step 7a overwrites them with the served ONNX model's outputs."
+}

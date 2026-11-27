@@ -9,7 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      ROUTER_MODE: light   # logistic-regression router; skips the embedding model download
+      ROUTER_MODE: light   # Ridge-regression router; no transformer runtime needed
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7

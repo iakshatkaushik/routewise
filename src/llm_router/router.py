@@ -2,7 +2,10 @@
 
 The trained artifact (models/router.joblib) holds
 - the fitted featurizer and SVD projection,
-- one or more component classifiers and a logistic "stacker" that combines them,
+- one or more component models and a logistic "stacker" that combines them. A component reads the
+  TF-IDF features, the SVD projection, sentence embeddings, or the raw text (the fine-tuned transformer,
+  run with ONNX Runtime from models/text_router.onnx), and gives the stacker a log-odds, a logit, or
+  minus a predicted 1-5 score,
 - a table mapping "share of traffic sent to the strong model" to a risk threshold,
 - the test-set routing curve (used to state expected quality at each budget),
 - linear weights used to explain a decision word by word.
@@ -27,8 +30,9 @@ def _logit(p):
 
 
 class Router:
-    """mode="full" uses every component; mode="light" uses logistic regression only, which
-    skips the embedding runtime (about 200 MB less memory) at a small accuracy cost."""
+    """mode="full" uses every component; mode="light" uses the artifact's light variant: sparse
+    (TF-IDF) components only, so neither the ONNX text model nor an embedding runtime is loaded
+    (about 114 MB less memory on the server) at an accuracy cost."""
 
     def __init__(self, artifact: dict, mode: str | None = None):
         mode = (mode or os.getenv("ROUTER_MODE", "full")).lower()
@@ -61,13 +65,27 @@ class Router:
             from .embedder import embed
             stats = self.featurizer.scaler_.transform(prompt_stats(prompts)).clip(-5, 5)
             feats["embed"] = np.hstack([embed(prompts), stats]).astype(np.float32)
+        if "text" in kinds:
+            from . import text_model
+            spec = self.a["text_model"]
+            feats["text"] = text_model.load(spec["onnx"], spec["tokenizer"], spec["max_tokens"]).logits(prompts)
         return feats
+
+    @staticmethod
+    def _component_signal(c, feats) -> np.ndarray:
+        """One stacker input per component: a log-odds, or minus a predicted 1-5 score."""
+        kind = c.get("output", "proba")
+        if kind == "text_logit":                       # fine-tuned transformer head (already a logit)
+            return feats["text"][:, c["head"]]
+        if kind == "score":                            # regressor of the cheap model's score
+            return -c["model"].predict(feats[c["input"]])
+        return _logit(c["model"].predict_proba(feats[c["input"]])[:, 1])
 
     def risk(self, prompts) -> np.ndarray:
         """Calibrated probability that the cheap model's answer is poor (score <= 3)."""
         prompts = [str(p)[: config.MAX_PROMPT_CHARS] for p in prompts]
         feats = self._features(prompts)
-        cols = [_logit(c["model"].predict_proba(feats[c["input"]])[:, 1]) for c in self.components]
+        cols = [self._component_signal(c, feats) for c in self.components]
         return self.stacker.predict_proba(np.column_stack(cols))[:, 1]
 
     def threshold_for(self, strong_share: float) -> float:

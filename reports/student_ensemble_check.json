@@ -1,0 +1,162 @@
+{
+  "students_scored": 54,
+  "top_single": [
+    {
+      "student": "search_student_of_qwen3_4b_combined_base_thenlper_gte_small_pooling_mean_epochs_6",
+      "cv_val_apgr": 0.7117,
+      "cv_val_auc": 0.7978
+    },
+    {
+      "student": "search_student_of_qwen3_4b_combined_pooling_mean_lr_8e_5_distill_alpha_0_1",
+      "cv_val_apgr": 0.7116,
+      "cv_val_auc": 0.7981
+    },
+    {
+      "student": "search_student_of_qwen3_4b_combined_pooling_mean_lr_8e_5_distill_alpha_0_1_seed_44",
+      "cv_val_apgr": 0.7114,
+      "cv_val_auc": 0.7978
+    },
+    {
+      "student": "search_student_of_qwen3_4b_combined_base_thenlper_gte_small_pooling_mean_epochs_6_seed_44",
+      "cv_val_apgr": 0.7114,
+      "cv_val_auc": 0.7968
+    },
+    {
+      "student": "search_student_of_qwen3_4b_lr_8e_5",
+      "cv_val_apgr": 0.7113,
+      "cv_val_auc": 0.7965
+    },
+    {
+      "student": "search_student_of_qwen3_4b_6_epochs",
+      "cv_val_apgr": 0.7113,
+      "cv_val_auc": 0.7963
+    }
+  ],
+  "pairs": [
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_base_thenlper_gte_small_pooling_mean_epochs_6",
+        "search_student_of_qwen3_4b_combined_pooling_mean_lr_8e_5_distill_alpha_0_1_seed_44"
+      ],
+      "cv_val_apgr": 0.7125,
+      "cv_val_auc": 0.7992
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_pooling_mean_lr_8e_5_distill_alpha_0_1",
+        "search_student_of_qwen3_4b_combined_base_thenlper_gte_small_pooling_mean_epochs_6_seed_44"
+      ],
+      "cv_val_apgr": 0.7125,
+      "cv_val_auc": 0.7988
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_base_thenlper_gte_small_pooling_mean_epochs_6",
+        "search_student_of_qwen3_4b_combined_pooling_mean_lr_8e_5_distill_alpha_0_1"
+      ],
+      "cv_val_apgr": 0.7124,
+      "cv_val_auc": 0.7988
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_base_thenlper_gte_small_pooling_mean_epochs_6_seed_44",
+        "search_student_of_qwen3_4b_lr_8e_5"
+      ],
+      "cv_val_apgr": 0.7124,
+      "cv_val_auc": 0.7981
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_base_thenlper_gte_small_pooling_mean_epochs_6",
+        "search_student_of_qwen3_4b_combined_base_thenlper_gte_small_pooling_mean_epochs_6_seed_44"
+      ],
+      "cv_val_apgr": 0.7123,
+      "cv_val_auc": 0.7985
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_base_thenlper_gte_small_pooling_mean_epochs_6_seed_44",
+        "search_student_of_qwen3_4b_6_epochs"
+      ],
+      "cv_val_apgr": 0.7123,
+      "cv_val_auc": 0.7979
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_pooling_mean_lr_8e_5_distill_alpha_0_1_seed_44",
+        "search_student_of_qwen3_4b_lr_8e_5"
+      ],
+      "cv_val_apgr": 0.7122,
+      "cv_val_auc": 0.7985
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_pooling_mean_lr_8e_5_distill_alpha_0_1_seed_44",
+        "search_student_of_qwen3_4b_6_epochs"
+      ],
+      "cv_val_apgr": 0.7122,
+      "cv_val_auc": 0.7984
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_base_thenlper_gte_small_pooling_mean_epochs_6",
+        "search_student_of_qwen3_4b_lr_8e_5"
+      ],
+      "cv_val_apgr": 0.7122,
+      "cv_val_auc": 0.7983
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_pooling_mean_lr_8e_5_distill_alpha_0_1",
+        "search_student_of_qwen3_4b_6_epochs"
+      ],
+      "cv_val_apgr": 0.7122,
+      "cv_val_auc": 0.7982
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_base_thenlper_gte_small_pooling_mean_epochs_6",
+        "search_student_of_qwen3_4b_6_epochs"
+      ],
+      "cv_val_apgr": 0.7122,
+      "cv_val_auc": 0.7981
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_pooling_mean_lr_8e_5_distill_alpha_0_1_seed_44",
+        "search_student_of_qwen3_4b_combined_base_thenlper_gte_small_pooling_mean_epochs_6_seed_44"
+      ],
+      "cv_val_apgr": 0.7121,
+      "cv_val_auc": 0.7985
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_pooling_mean_lr_8e_5_distill_alpha_0_1",
+        "search_student_of_qwen3_4b_combined_pooling_mean_lr_8e_5_distill_alpha_0_1_seed_44"
+      ],
+      "cv_val_apgr": 0.712,
+      "cv_val_auc": 0.7987
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_combined_pooling_mean_lr_8e_5_distill_alpha_0_1",
+        "search_student_of_qwen3_4b_lr_8e_5"
+      ],
+      "cv_val_apgr": 0.7119,
+      "cv_val_auc": 0.7981
+    },
+    {
+      "students": [
+        "search_student_of_qwen3_4b_lr_8e_5",
+        "search_student_of_qwen3_4b_6_epochs"
+      ],
+      "cv_val_apgr": 0.7118,
+      "cv_val_auc": 0.7971
+    }
+  ],
+  "best_pair_gain_apgr": 0.0008,
+  "both_heads_of_best_single": {
+    "cv_val_apgr": 0.7086,
+    "cv_val_auc": 0.8042
+  }
+}

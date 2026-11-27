@@ -1,28 +1,159 @@
 {
+  "selection_rule": "greedy forward selection on 5-fold cross-validated stacked validation APGR (AUC breaks ties); add only if APGR improves by >= 0.001; at most 4",
   "selection_log": [
     {
+      "step": 1,
+      "trials": {
+        "Fine-tuned Transformer (GPU), score-deficit head": {
+          "cv_val_apgr": 0.7098,
+          "cv_val_auc": 0.7971
+        },
+        "Fine-tuned Transformer (GPU)": {
+          "cv_val_apgr": 0.7068,
+          "cv_val_auc": 0.8015
+        },
+        "Ridge regression (predicted score)": {
+          "cv_val_apgr": 0.6804,
+          "cv_val_auc": 0.7589
+        },
+        "Embedding Neural Network (GPU)": {
+          "cv_val_apgr": 0.6753,
+          "cv_val_auc": 0.76
+        },
+        "Logistic Regression": {
+          "cv_val_apgr": 0.675,
+          "cv_val_auc": 0.7597
+        },
+        "Neural Network (MLP)": {
+          "cv_val_apgr": 0.6684,
+          "cv_val_auc": 0.7513
+        },
+        "Gradient Boosting (beyond syllabus)": {
+          "cv_val_apgr": 0.6642,
+          "cv_val_auc": 0.7462
+        },
+        "Decision Tree (Entropy / information gain)": {
+          "cv_val_apgr": 0.6383,
+          "cv_val_auc": 0.7098
+        }
+      },
+      "best_candidate": "Fine-tuned Transformer (GPU), score-deficit head",
+      "gain": null,
+      "decision": "add",
       "components": [
-        "Embedding Neural Network (GPU)"
+        "Fine-tuned Transformer (GPU), score-deficit head"
       ],
-      "val_auc": 0.76
+      "cv_val_apgr": 0.7098,
+      "cv_val_auc": 0.7971
     },
     {
-      "components": [
-        "Embedding Neural Network (GPU)",
-        "Logistic Regression"
-      ],
-      "val_auc": 0.7711
+      "step": 2,
+      "trials": {
+        "Ridge regression (predicted score)": {
+          "cv_val_apgr": 0.7103,
+          "cv_val_auc": 0.7981
+        },
+        "Decision Tree (Entropy / information gain)": {
+          "cv_val_apgr": 0.7092,
+          "cv_val_auc": 0.7971
+        },
+        "Logistic Regression": {
+          "cv_val_apgr": 0.7092,
+          "cv_val_auc": 0.7983
+        },
+        "Neural Network (MLP)": {
+          "cv_val_apgr": 0.709,
+          "cv_val_auc": 0.798
+        },
+        "Embedding Neural Network (GPU)": {
+          "cv_val_apgr": 0.709,
+          "cv_val_auc": 0.7983
+        },
+        "Gradient Boosting (beyond syllabus)": {
+          "cv_val_apgr": 0.7088,
+          "cv_val_auc": 0.7978
+        },
+        "Fine-tuned Transformer (GPU)": {
+          "cv_val_apgr": 0.7066,
+          "cv_val_auc": 0.8015
+        }
+      },
+      "best_candidate": "Ridge regression (predicted score)",
+      "gain": 0.0004,
+      "decision": "stop: gain below 0.001"
     }
   ],
+  "light_selection_log": [
+    {
+      "step": 1,
+      "trials": {
+        "Ridge regression (predicted score)": {
+          "cv_val_apgr": 0.6804,
+          "cv_val_auc": 0.7589
+        },
+        "Logistic Regression": {
+          "cv_val_apgr": 0.675,
+          "cv_val_auc": 0.7597
+        }
+      },
+      "best_candidate": "Ridge regression (predicted score)",
+      "gain": null,
+      "decision": "add",
+      "components": [
+        "Ridge regression (predicted score)"
+      ],
+      "cv_val_apgr": 0.6804,
+      "cv_val_auc": 0.7589
+    },
+    {
+      "step": 2,
+      "trials": {
+        "Logistic Regression": {
+          "cv_val_apgr": 0.6796,
+          "cv_val_auc": 0.7623
+        }
+      },
+      "best_candidate": "Logistic Regression",
+      "gain": -0.0008,
+      "decision": "stop: gain below 0.001"
+    }
+  ],
+  "candidates": [
+    "Logistic Regression",
+    "Ridge regression (predicted score)",
+    "Embedding Neural Network (GPU)",
+    "Fine-tuned Transformer (GPU)",
+    "Fine-tuned Transformer (GPU), score-deficit head",
+    "Neural Network (MLP)",
+    "Gradient Boosting (beyond syllabus)",
+    "Decision Tree (Entropy / information gain)"
+  ],
+  "validation_cv": {
+    "full": {
+      "apgr": 0.7098,
+      "auc": 0.7971
+    },
+    "light": {
+      "apgr": 0.6804,
+      "auc": 0.7589
+    }
+  },
+  "text_model": {
+    "onnx": "text_router.onnx",
+    "tokenizer": "text_tokenizer.json",
+    "max_tokens": 512
+  },
   "compression": {},
   "light_mode": {
     "components": [
-      "Logistic Regression"
+      "Ridge regression (predicted score)"
     ],
-    "test_auc": 0.7680008301286791,
-    "test_apgr": 0.6826515930113055,
-    "cpt50": 0.26,
-    "cpt80": 0.5700000000000001,
+    "val_cv_apgr": 0.6804,
+    "val_cv_auc": 0.7589,
+    "test_auc": 0.764283072512065,
+    "test_apgr": 0.6846985268927717,
+    "cpt50": 0.25,
+    "cpt80": 0.56,
     "trained_rows": 109101,
     "cheap_model_in_data": "Mixtral-8x7B-Instruct",
     "strong_model_in_data": "GPT-4",
@@ -30,45 +161,44 @@
     "mode": "light"
   },
   "components": [
-    "Embedding Neural Network (GPU)",
-    "Logistic Regression"
+    "Fine-tuned Transformer (GPU), score-deficit head"
   ],
   "test_classification_at_30pct": {
-    "roc_auc": 0.7807308944542498,
-    "threshold": 0.15632367134094236,
-    "accuracy": 0.7455,
-    "precision": 0.2967257844474761,
-    "recall_sensitivity": 0.6430155210643016,
-    "specificity": 0.761535792760495,
-    "f1": 0.40606767794632437,
+    "roc_auc": 0.8022107304559698,
+    "threshold": 0.15024542368486646,
+    "accuracy": 0.7508,
+    "precision": 0.3093404753933713,
+    "recall_sensitivity": 0.6829268292682927,
+    "specificity": 0.7614201457152769,
+    "f1": 0.4258064516129032,
     "confusion_matrix": {
-      "tn": 6585,
-      "fp": 2062,
-      "fn": 483,
-      "tp": 870
+      "tn": 6584,
+      "fp": 2063,
+      "fn": 429,
+      "tp": 924
     }
   },
   "test_routing": {
-    "apgr": 0.6912863994518672,
-    "cpt50": 0.25,
-    "cpt80": 0.55,
-    "cpt90": 0.72,
+    "apgr": 0.714068174032203,
+    "cpt50": 0.23,
+    "cpt80": 0.5,
+    "cpt90": 0.67,
     "quality_cheap_only": 4.4162,
     "quality_strong_only": 5.0,
     "at_20pct": {
       "strong_share": 0.2,
-      "quality": 4.6687,
-      "pgr": 0.4325111339499835
+      "quality": 4.6883,
+      "pgr": 0.46608427543679337
     },
     "at_30pct": {
       "strong_share": 0.3,
-      "quality": 4.7481,
-      "pgr": 0.5685166152792053
+      "quality": 4.7693,
+      "pgr": 0.6048304213771846
     },
     "at_50pct": {
       "strong_share": 0.5,
-      "quality": 4.8665,
-      "pgr": 0.7713257965056531
+      "quality": 4.8838,
+      "pgr": 0.8009592326139088
     }
   },
   "baselines": {
@@ -99,25 +229,56 @@
   },
   "budget_check": {
     "0%": 0.0,
-    "10%": 0.1016,
-    "20%": 0.1968,
-    "30%": 0.2932,
-    "40%": 0.3896,
-    "50%": 0.4897,
-    "60%": 0.5876,
-    "70%": 0.681,
-    "80%": 0.7876,
-    "90%": 0.8865,
+    "10%": 0.0992,
+    "20%": 0.198,
+    "30%": 0.2987,
+    "40%": 0.3989,
+    "50%": 0.4986,
+    "60%": 0.5914,
+    "70%": 0.6906,
+    "80%": 0.7951,
+    "90%": 0.8959,
     "100%": 1.0
   },
   "performance": {
-    "artifact_mb": 16.87,
-    "batch_ms_per_prompt": 76.794,
-    "single_p50_ms": 16.33,
-    "single_p95_ms": 159.68,
-    "max_abs_diff_vs_offline": 0.0006821751594543457,
-    "mean_abs_diff_vs_offline": 9.516757563687861e-05,
+    "artifact_mb": 14.83,
+    "batch_ms_per_prompt": 23.449,
+    "single_p50_ms": 8.07,
+    "single_p95_ms": 114.81,
+    "single_p50_ms_2000": 8.63,
+    "single_p95_ms_2000": 188.7,
+    "max_abs_diff_vs_offline": 5.284644499781166e-08,
+    "mean_abs_diff_vs_offline": 6.0174249282164e-09,
     "decision_agreement_at_30pct": 1.0,
-    "note": "online embeddings use ONNX on CPU; offline used PyTorch on the GPU"
+    "threads": 1,
+    "prompts_checked": 2000,
+    "note": "sparse/dense path is bit-exact; the text model is the same ONNX file online and offline"
+  },
+  "light_performance": {
+    "artifact_mb": 14.83,
+    "batch_ms_per_prompt": 0.497,
+    "single_p50_ms": 1.22,
+    "single_p95_ms": 2.84,
+    "single_p50_ms_2000": 1.3,
+    "single_p95_ms_2000": 3.41,
+    "max_abs_diff_vs_offline": 1.3852821048598862e-07,
+    "mean_abs_diff_vs_offline": 3.812429622690461e-10,
+    "decision_agreement_at_30pct": 1.0,
+    "threads": 1,
+    "prompts_checked": 2000
+  },
+  "memory": {
+    "full": {
+      "rss_mb": 347.7,
+      "peak_rss_mb": 480.3,
+      "prompts_routed": 20
+    },
+    "light": {
+      "rss_mb": 235.6,
+      "peak_rss_mb": 244.3,
+      "prompts_routed": 20
+    },
+    "platform": "linux",
+    "note": "fresh Python process: load the router, route 20 test prompts, read /proc/self/status"
   }
 }

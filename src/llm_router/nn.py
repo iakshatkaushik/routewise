@@ -1,6 +1,6 @@
 """Neural network pieces (syllabus unit: Artificial Neural Networks).
 
-`train_mlp` trains a feed-forward network with PyTorch on the GPU (Apple "mps", CUDA, or CPU).
+`train_mlp` trains a feed-forward network with PyTorch on the GPU (CPU fallback).
 `NumpyMLP` holds the trained weights and runs the forward pass with NumPy only, so the web
 service does not need PyTorch installed.
 """
@@ -42,11 +42,7 @@ class NumpyMLP:
 
 def torch_device():
     import torch
-    if torch.backends.mps.is_available():
-        return "mps"
-    if torch.cuda.is_available():
-        return "cuda"
-    return "cpu"
+    return "cuda" if torch.cuda.is_available() else "cpu"
 
 
 def train_mlp(X, y, X_val, y_val, hidden=(512,), dropout=0.2, lr=1e-3, weight_decay=1e-4,

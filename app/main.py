@@ -39,7 +39,9 @@ LLM_BASE_URL = os.getenv("LLM_BASE_URL", "https://api.groq.com/openai/v1").rstri
 LLM_API_KEY = os.getenv("LLM_API_KEY", "")
 CHEAP_MODEL = os.getenv("CHEAP_MODEL", "openai/gpt-oss-20b")
 STRONG_MODEL = os.getenv("STRONG_MODEL", "openai/gpt-oss-120b")
-MAX_TOKENS = int(os.getenv("MAX_TOKENS", "700"))
+MAX_TOKENS = int(os.getenv("MAX_TOKENS", "2048"))
+# gpt-oss models think before they answer; that hidden reasoning counts against MAX_TOKENS, so keep it short
+REASONING_EFFORT = os.getenv("LLM_REASONING_EFFORT", "low")
 CHAT_LIMIT = int(os.getenv("CHAT_LIMIT_PER_10MIN", "15"))
 ROUTE_LIMIT = int(os.getenv("ROUTE_LIMIT_PER_MIN", "120"))
 
@@ -104,7 +106,8 @@ async def _complete(client: httpx.AsyncClient, model: str, prompt: str) -> dict:
     r = await client.post(f"{LLM_BASE_URL}/chat/completions",
                           headers={"Authorization": f"Bearer {LLM_API_KEY}"},
                           json={"model": model, "max_tokens": MAX_TOKENS,
-                                "messages": [{"role": "user", "content": prompt}]})
+                                "messages": [{"role": "user", "content": prompt}],
+                                **({"reasoning_effort": REASONING_EFFORT} if "gpt-oss" in model and REASONING_EFFORT else {})})
     if r.status_code != 200:
         detail = r.text[:300]
         raise HTTPException(502, f"LLM provider error ({r.status_code}) for {model}: {detail}")

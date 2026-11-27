@@ -20,6 +20,8 @@ from llm_router.features import STAT_NAMES, prompt_stats
 
 warnings.filterwarnings("ignore", message="Objective did not converge")
 
+RIDGE_COL = "Ridge regression (predicted score)"   # column name in the val/test score tables
+
 if __name__ == "__main__":
     train, test = data.load("train"), data.load("test")
     y, yt = train.score.values.astype(float), test.score.values.astype(float)
@@ -67,7 +69,19 @@ if __name__ == "__main__":
         return best[1]
 
     a = tune(lambda a: Ridge(alpha=a, solver="sparse_cg"), [3, 10, 30, 100])
-    record("Ridge (L2), full features", Ridge(alpha=a, solver="sparse_cg"), X, Xt, {"alpha": a})
+    ridge = record("Ridge (L2), full features", Ridge(alpha=a, solver="sparse_cg"), X, Xt, {"alpha": a})
+    # Ridge is also a candidate router component (step 7). Its validation predictions must come from
+    # step 3's split (stratified on the fail label) so all components are stacked on the same rows.
+    import joblib
+    import pandas as pd
+    s_tr, s_va = train_test_split(np.arange(len(y)), test_size=0.2, random_state=config.SEED, stratify=train.label.values)
+    val_df, test_df = pd.read_parquet(config.REPORTS / "val_scores.parquet"), pd.read_parquet(config.REPORTS / "test_scores.parquet")
+    assert np.array_equal(s_va, val_df["row"].values), "validation split differs from step 3"
+    val_df[RIDGE_COL] = Ridge(alpha=a, solver="sparse_cg").fit(X[s_tr], y[s_tr]).predict(X[s_va])
+    test_df[RIDGE_COL] = ridge.predict(Xt)
+    val_df.to_parquet(config.REPORTS / "val_scores.parquet")
+    test_df.to_parquet(config.REPORTS / "test_scores.parquet")
+    joblib.dump(ridge, config.MODELS / "reg_ridge.joblib")
     a = tune(lambda a: Lasso(alpha=a, max_iter=1000, tol=1e-3), [1e-4, 3e-4, 1e-3])
     m = record("Lasso (L1), full features", Lasso(alpha=a, max_iter=1000, tol=1e-3), X, Xt, {"alpha": a})
     out["Lasso (L1), full features"]["nonzero_coefficients"] = int((m.coef_ != 0).sum())

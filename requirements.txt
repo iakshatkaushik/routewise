@@ -4,6 +4,14 @@ pandas==3.1.1
 pyarrow==26.0.1
 matplotlib==3.11.2
 pytest==9.2.0
-# GPU embeddings + neural network (uses Apple-Silicon 'mps', CUDA, or CPU)
+python-dotenv==1.2.4      # lets uvicorn read --env-file .env
+# GPU embeddings, neural network and transformer fine-tuning (GPU through PyTorch, or CPU).
+# On Linux with an older NVIDIA driver (CUDA 12.x), install a CUDA-12 torch build instead, e.g.
+#   pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cu126
 torch==2.15.0
 sentence-transformers==6.3.0
+transformers==5.24.1
+# ONNX export of the fine-tuned model (scripts/07a_export_text_model.py)
+onnx==1.23.2
+# tokenizer of microsoft/deberta-v3-large (larger-model study, scripts/03d_model_study.py)
+sentencepiece==0.2.3

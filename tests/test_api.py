@@ -53,8 +53,26 @@ def test_pages_and_metrics(client):
 
 
 def test_light_mode_router():
+    """Light mode needs no embedding runtime and no ONNX text model (for 512 MB servers)."""
     from llm_router.router import Router
     r = Router.load(mode="light")
-    assert r.mode == "light" and [c["name"] for c in r.components] == ["Logistic Regression"]
+    assert r.mode == "light" and r.components
+    assert all(c["input"] == "sparse" for c in r.components)
+    feats = r._features(["hello"])
+    assert set(feats) == {"sparse"}
     out = r.route("Translate this sentence into German: good night.", 0.3)
     assert out["route"] in {"cheap", "strong"}
+
+
+def test_full_mode_router():
+    from llm_router.router import Router
+    r = Router.load(mode="full")
+    assert r.mode == "full" and r.components
+    spec = r.a.get("text_model")
+    if spec and not (config.MODELS / spec["onnx"]).exists():
+        pytest.skip("text model file missing")
+    if any(c["input"] == "embed" for c in r.components):
+        pytest.importorskip("fastembed")
+    for p in ["hi", "Prove that there are infinitely many primes.", "x" * 4000]:
+        out = r.route(p, 0.3)
+        assert out["route"] in {"cheap", "strong"} and 0 <= out["p_cheap_fails"] <= 1

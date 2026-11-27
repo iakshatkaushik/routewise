@@ -38,6 +38,39 @@ if __name__ == "__main__":
     _, _, pgr_oracle = metrics.routing_curve(5 - test.score.values, test.score.values, points=51)
 
     rr = f7["test_routing"]
+
+    # fine-tuned transformer (step 3c): validation-only sweep, final run, ONNX export check (step 7a)
+    def opt(name):
+        path = config.REPORTS / name
+        return load_json(name) if path.exists() else None
+    sweep, ft, export = opt("finetune_sweep.json"), opt("03c_finetune.json"), opt("07a_text_export.json")
+    finetune = None
+    if ft:
+        finetune = {
+            "base_model": ft["base"], "max_tokens": ft["max_tokens"], "hyperparameters": ft["hyperparameters"],
+            "seed": ft["seed"], "teacher": ft.get("teacher"), "distill_alpha": ft.get("distill_alpha"),
+            "pooling": ft.get("pooling", "cls"),
+            "precision": ft["precision"], "gpu": ft.get("gpu"), "train_minutes": ft["train_minutes"],
+            "history": ft["history"], "results": ft["results"],
+            # every validation-only run except the teacher's fold runs (summarised separately)
+            "sweep": [{"tag": r["tag"], "base": r["base"], "lr": r["lr"], "epochs": r["epochs"],
+                       "batch_size": r["batch_size"], "max_tokens": r["max_tokens"],
+                       "deficit_weight": r["deficit_weight"], "seed": r["seed"], "precision": r["precision"],
+                       "pooling": r.get("pooling", "cls"), "params_millions": r.get("params_millions"),
+                       "teacher": r.get("teacher"), "distill_alpha": r.get("distill_alpha"),
+                       "kind": ("study" if r["tag"].startswith("study:") else
+                                "distill" if r.get("teacher") else "sweep"),
+                       "train_minutes": r["train_minutes"], **r["best_checkpoint"]}
+                      for r in (sweep or {}).get("runs", []) if not r.get("n_folds")],
+            "teacher_folds": [{"tag": r["tag"], "train_minutes": r["train_minutes"], **r["best_checkpoint"]}
+                              for r in (sweep or {}).get("runs", []) if r.get("n_folds")],
+            # fold runs of the teacher the deployed student learned from (its out-of-fold file is ft["teacher"])
+            "teacher_name": {"models/teacher/teacher_oof.npz": "Qwen3-1.7B",
+                             "models/teacher/teacher_oof_qwen3_4b.npz": "Qwen3-4B",
+                             "models/teacher/teacher_oof_qwen3_8b_lora.npz": "Qwen3-8B"}.get(ft.get("teacher")),
+            "export": export and {k: export[k] for k in ("served_variant", "served_mb", "variants_validation",
+                                                         "int8_val_auc_loss_vs_fp32", "latency_1_thread_ms", "rule")},
+        }
     summary = {
         "built": time.strftime("%Y-%m-%d"),
         "data": {"train_rows": d1["train"]["rows_out"], "test_rows": d1["test"]["rows_out"],
@@ -52,7 +85,16 @@ if __name__ == "__main__":
         "baselines": {"random_apgr": c3["baselines"]["random_apgr"], "oracle_apgr": c3["baselines"]["oracle"]["apgr"]},
         "router": {"components": f7["components"], "auc": f7["test_classification_at_30pct"]["roc_auc"],
                    "classification_at_30pct": f7["test_classification_at_30pct"], **rr,
-                   "performance": f7["performance"], "budget_check": f7["budget_check"]},
+                   "performance": f7["performance"] | ({"text_model_mb": export["served_mb"]}
+                                                      if export and f7.get("text_model") else {}),
+                   "budget_check": f7["budget_check"],
+                   "validation_cv": f7.get("validation_cv"), "selection_log": f7.get("selection_log"),
+                   "selection_rule": f7.get("selection_rule"),
+                   "memory": f7.get("memory"),
+                   "light": {k: f7["light_mode"].get(k) for k in ("components", "test_auc", "test_apgr", "cpt50", "cpt80",
+                                                                  "val_cv_apgr", "val_cv_auc")}
+                            | {"performance": f7.get("light_performance")}},
+        "finetune": finetune,
         "curves": {"x": xs.tolist(),
                    "final": np.interp(xs, final_curve["x"], final_curve["pgr"]).tolist(),
                    "best_single": pgr_best.tolist(), "best_single_name": best_single,

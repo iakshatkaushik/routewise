@@ -1,0 +1,50 @@
+{
+  "source": "models/finetuned",
+  "base_model": "BAAI/bge-small-en-v1.5",
+  "max_tokens": 512,
+  "served_variant": "int8",
+  "served_file": "text_router.onnx",
+  "served_mb": 33.87,
+  "tokenizer_file": "text_tokenizer.json",
+  "variants_validation": {
+    "int8": {
+      "file_mb": 33.87,
+      "val_auc_fail": 0.80157,
+      "val_auc_deficit": 0.79714,
+      "val_apgr_fail": 0.70683,
+      "val_apgr_deficit": 0.70989,
+      "max_abs_logit_diff_vs_pytorch_256": 0.92115,
+      "max_abs_logit_diff_vs_pytorch_256_padded_batches": 0.78652,
+      "val_scoring_seconds": 45.1,
+      "workers": 48,
+      "batch_size": 1
+    },
+    "fp32": {
+      "file_mb": 133.12,
+      "val_auc_fail": 0.80371,
+      "val_auc_deficit": 0.79814,
+      "val_apgr_fail": 0.70949,
+      "val_apgr_deficit": 0.71162,
+      "max_abs_logit_diff_vs_pytorch_256": 0.0,
+      "max_abs_logit_diff_vs_pytorch_256_padded_batches": 0.0,
+      "val_scoring_seconds": 62.7,
+      "workers": 48,
+      "batch_size": 1
+    }
+  },
+  "int8_val_auc_loss_vs_fp32": 0.00214,
+  "rule": "serve int8 unless it loses more than 0.003 validation AUC; file must be < 95 MB",
+  "served_validation": {
+    "val_auc_fail": 0.80157,
+    "val_auc_deficit": 0.79714,
+    "val_apgr_fail": 0.70683,
+    "val_apgr_deficit": 0.70989
+  },
+  "latency_1_thread_ms": {
+    "p50": 6.02,
+    "p95": 115.01,
+    "mean": 24.02,
+    "prompts": 300
+  },
+  "cpu": "x86_64"
+}
