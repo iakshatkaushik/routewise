@@ -18,7 +18,8 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 REP = ROOT / "reports"
 DECK = os.getenv("DECK") == "1"          # DECK=1: blue palette + Times New Roman, for the slides
-MONO = not DECK                          # report figures: black, white and grey only, Times New Roman
+MONO = not DECK                          # report figures: textbook style (square boxes, black outlines, Times New Roman)
+GREY = MONO and os.getenv("REPORT_GREY") == "1"   # REPORT_GREY=1: no colour at all
 OUT = REP / "report_figures" / ("deck" if DECK else "")
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -31,8 +32,12 @@ if DECK:
 SOFT = {CHEAP: "#DCEEFA", STRONG: "#DCE5F0", AMBER: "#FBEFD3", CORAL: "#F8E0E0", SKY: "#DDE8F3", SLATE: "#ECEFF4"}
 if MONO:
     INK, MUTED, GRID, PAPER = "#000000", "#333333", "#D0D0D0", "#FFFFFF"
-    CHEAP, STRONG, AMBER, CORAL, SKY, SLATE = "#B8B8B8", "#1C1C1C", "#6F6F6F", "#4B4B4B", "#9B9B9B", "#7E7E7E"
-    SOFT = {CHEAP: "#F3F3F3", STRONG: "#E2E2E2", AMBER: "#EBEBEB", CORAL: "#D4D4D4", SKY: "#FFFFFF", SLATE: "#FFFFFF"}
+    if GREY:
+        CHEAP, STRONG, AMBER, CORAL, SKY, SLATE = "#B8B8B8", "#1C1C1C", "#6F6F6F", "#4B4B4B", "#9B9B9B", "#7E7E7E"
+        SOFT = {CHEAP: "#F3F3F3", STRONG: "#E2E2E2", AMBER: "#EBEBEB", CORAL: "#D4D4D4", SKY: "#FFFFFF", SLATE: "#FFFFFF"}
+    else:   # green = cheap model, blue = strong model, orange = router/threshold, red = failures
+        CHEAP, STRONG, AMBER, CORAL, SKY, SLATE = "#2CA02C", "#1F77B4", "#FF7F0E", "#D62728", "#6BAED6", "#7F7F7F"
+        SOFT = {CHEAP: "#E3F2E1", STRONG: "#DCE9F5", AMBER: "#FDE8D2", CORAL: "#F9DEDD", SKY: "#EAF2F9", SLATE: "#F2F2F2"}
 
 plt.rcParams.update({
     "font.family": ["Times New Roman"],
@@ -57,7 +62,7 @@ def save(fig, name, subtitle=None):
         fig.axes[0].set_title("")           # the report gives every figure a caption instead
     fig.savefig(OUT / name)
     plt.close(fig)
-    if MONO:                                # guarantee no colour at all in report figures
+    if GREY:                                # guarantee no colour at all
         from PIL import Image
         Image.open(OUT / name).convert("L").save(OUT / name)
     print("saved", name)
@@ -67,7 +72,8 @@ def save(fig, name, subtitle=None):
 def box(ax, x, y, w, h, title, body="", color=SKY, title_size=10.5, body_size=8.6, filled=False):
     face = color if filled else SOFT.get(color, "#F4F6FA")
     if MONO:                                # plain textbook boxes: black outline, white or light-grey fill
-        ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="square,pad=0.012", fc="#E9E9E9" if filled else "white",
+        ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="square,pad=0.012",
+                                    fc=("#E9E9E9" if filled else "white") if GREY else SOFT.get(color, "#F2F2F2"),
                                     ec="black", lw=1.3, zorder=3))
         filled = False
     else:
@@ -180,7 +186,7 @@ def actor(ax, x, y, name, color=INK):
 
 
 def usecase(ax, x, y, text, color):
-    ax.add_patch(matplotlib.patches.Ellipse((x, y), 0.25, 0.10, fc="white" if MONO else SOFT[color], ec="black" if MONO else color, lw=1.3 if MONO else 1.5, zorder=3))
+    ax.add_patch(matplotlib.patches.Ellipse((x, y), 0.25, 0.10, fc="white" if GREY else SOFT[color], ec="black" if MONO else color, lw=1.3 if MONO else 1.5, zorder=3))
     ax.text(x, y, text, ha="center", va="center", fontsize=9, zorder=4)
 
 
@@ -211,12 +217,13 @@ def fig_usecase():
 def uml_class(ax, x, y, w, name, attrs, methods, color):
     lh = 0.042
     h = 0.07 + lh * (len(attrs) + len(methods)) + 0.03
+    hdr = "#E6E6E6" if GREY else SOFT.get(color, "#E6E6E6")
     if MONO:
         color = "black"
     ax.add_patch(FancyBboxPatch((x, y - h), w, h, boxstyle="square,pad=0.004" if MONO else "round,pad=0.004,rounding_size=0.012",
                                 fc="white", ec=color, lw=1.6, zorder=3))
     ax.add_patch(FancyBboxPatch((x, y - 0.065), w, 0.065, boxstyle="square,pad=0.004" if MONO else "round,pad=0.004,rounding_size=0.012",
-                                fc="#E6E6E6" if MONO else color, ec=color, lw=1.6, zorder=3))
+                                fc=hdr if MONO else color, ec=color, lw=1.6, zorder=3))
     ax.text(x + w / 2, y - 0.033, name, ha="center", va="center", color="black" if MONO else "white", fontweight="bold", fontsize=9.5, zorder=4)
     yy = y - 0.065 - lh * 0.75
     for a in attrs:
@@ -344,7 +351,7 @@ def fig_leaderboard():
     names = [short(r["name"]) for r in rows]
     vals = [r["apgr"] for r in rows]
     cols = [FAMILY.get(r["name"], ("other", SLATE))[1] for r in rows]
-    if MONO:        # two shades only: the distilled transformer in black, every other model in grey
+    if GREY:        # two shades only: the distilled transformer in black, every other model in grey
         cols = ["#000000" if r["name"].startswith("Fine-tuned") else "#9B9B9B" for r in rows]
     y = np.arange(len(rows))
     ax.barh(y, [v - 0.5 for v in vals], left=0.5, color=cols, height=0.62, zorder=3)
@@ -362,7 +369,7 @@ def fig_leaderboard():
     handles = {}
     for fam, col in FAMILY.values():
         handles[fam] = plt.Rectangle((0, 0), 1, 1, color=col)
-    if not MONO:
+    if not GREY:
         ax.legend(handles.values(), handles.keys(), loc="lower left", bbox_to_anchor=(0.6, 0.02), fontsize=8.5, ncol=2)
     save(fig, "fig08_leaderboard.png")
 
@@ -381,7 +388,7 @@ def fig_scaling():
                                     if r.get("base") == "BAAI/bge-small-en-v1.5" and r.get("params_millions"))
     fig, ax = plt.subplots(figsize=(8.6, 5.2))
     ax.axvspan(10, 95, color=SOFT[CHEAP], zorder=0)
-    ax.text(12, 0.829, "deployable on a CPU\n(int8 file < 95 MB)", fontsize=8.8, color=MUTED if MONO else CHEAP, va="top")
+    ax.text(12, 0.829, "deployable on a CPU\n(int8 file < 95 MB)", fontsize=8.8, color=MUTED if GREY else CHEAP, va="top")
     pts = [(plain["params_millions"], plain["best_checkpoint"]["val_auc_fail"], "bge-small\n(plain fine-tune)", SKY)]
     for r in study:
         name = r["tag"].split(":")[1].split(",")[0].split("(")[0].strip()
